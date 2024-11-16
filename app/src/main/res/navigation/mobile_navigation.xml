@@ -12,14 +12,14 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.dicoding.greenquest.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_leaderboard"
+        android:name="com.dicoding.greenquest.ui.leaderboard.LeaderboardFragment"
+        android:label="@string/title_leaderboard"
+        tools:layout="@layout/fragment_leaderboard" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.dicoding.greenquest.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_profiles"
+        android:name="com.dicoding.greenquest.ui.profile.ProfilesFragment"
+        android:label="@string/title_profiles"
+        tools:layout="@layout/fragment_profiles" />
 </navigation>
