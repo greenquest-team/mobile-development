@@ -13,4 +13,9 @@
         <item name="android:statusBarColor">@color/brown_700</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="Theme.RemoveSplashScreenTheme" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
 </resources>
