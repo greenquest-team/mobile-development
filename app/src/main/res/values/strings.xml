@@ -3,19 +3,6 @@
     <string name="title_home">Home</string>
     <string name="title_leaderboard">Leaderboard</string>
     <string name="title_profiles">Profiles</string>
-    <string name="greetings_name">Halo, Ray!</string>
-    <string name="greetings_question">sudah buang sampah hari ini?</string>
-    <string name="misi_title">Hai Quessers, ayo lanjutkan misimu!</string>
-    <string name="title_quest_hari_ini">Quest Hari Ini!</string>
-    <string name="username">Ray</string>
-    <string name="points_count">1356 points</string>
-    <string name="informasi_pribadi">Informasi Pribadi</string>
-    <string name="selamat_kamu_naik_peringkat">Selamat, kamu naik\nperingkat!</string>
-    <string name="progressmu_sampai_mana">Progressmu sampai mana?</string>
-    <string name="cek_leaderboard">cek leaderboard</string>
-    <string name="lihat">lihat</string>
-    <string name="history">History</string>
-    <string name="profile">Profile</string>
-    <string name="ray">Ray</string>
-    <string name="leaderboard">Leaderboard</string>
+    
+    <string name="btn_scan">Scan</string>
 </resources>
