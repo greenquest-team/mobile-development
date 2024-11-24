@@ -38,6 +38,7 @@ android {
     buildFeatures {
         buildConfig = true
         viewBinding = true
+        mlModelBinding = true
     }
 }
 
@@ -55,6 +56,8 @@ dependencies {
     implementation(libs.camera.view)
     implementation(libs.androidx.camera.camera2)
     implementation(libs.androidx.camera.lifecycle)
+    implementation(libs.tensorflow.lite.support)
+    implementation(libs.tensorflow.lite.metadata)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -71,4 +74,13 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
+
+    implementation(libs.tensorflow.lite)
+    implementation(libs.tensorflow.lite.api)
+    implementation(libs.tensorflow.lite.support.v044)
+    implementation(libs.tensorflow.lite.gpu.delegate.plugin)
+
+    implementation(libs.tensorflow.lite.task.vision)
+    implementation(libs.tensorflow.lite.metadata.v044)
+    implementation(libs.tensorflow.lite.gpu)
 }
