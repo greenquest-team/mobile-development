@@ -3,4 +3,10 @@
     <string name="title_home">Home</string>
     <string name="title_leaderboard">Leaderboard</string>
     <string name="title_profiles">Profiles</string>
+    
+    <string name="btn_scan">Scan</string>
+
+    <string name="tflitevision_is_not_initialized_yet">TfLiteVision is not initialized yet</string>
+
+    <string name="test">Test 123</string>
 </resources>
