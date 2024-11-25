@@ -38,6 +38,7 @@ android {
     buildFeatures {
         buildConfig = true
         viewBinding = true
+        mlModelBinding = true
     }
 }
 
@@ -52,6 +53,12 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.activity)
+    implementation(libs.camera.view)
+    implementation(libs.androidx.camera.camera2)
+    implementation(libs.androidx.camera.lifecycle)
+    implementation(libs.tensorflow.lite.support)
+    implementation(libs.tensorflow.lite.metadata)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -68,8 +75,19 @@ dependencies {
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
 
+
     //to make rounded image view
     implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation("com.eightbitlab:blurview:1.6.6") //blur view
     implementation("com.mikhaellopez:circularprogressbar:3.1.0") //progress bar-circle
+
+    implementation(libs.tensorflow.lite)
+    implementation(libs.tensorflow.lite.api)
+    implementation(libs.tensorflow.lite.support.v044)
+    implementation(libs.tensorflow.lite.gpu.delegate.plugin)
+
+    implementation(libs.tensorflow.lite.task.vision)
+    implementation(libs.tensorflow.lite.metadata.v044)
+    implementation(libs.tensorflow.lite.gpu)
+
 }

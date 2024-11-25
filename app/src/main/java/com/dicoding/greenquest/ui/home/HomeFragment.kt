@@ -1,11 +1,13 @@
 package com.dicoding.greenquest.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.dicoding.greenquest.ScanActivity
 import com.dicoding.greenquest.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -40,6 +42,18 @@ class HomeFragment : Fragment() {
         binding.textView // TextView "lihat"
 
         // ... kode lainnya, seperti mengatur teks, event listener, dll. ...
+
+//        contoh aja
+        val btnScan: TextView = binding.button
+        homeViewModel.text.observe(viewLifecycleOwner) {
+            btnScan.text = it
+        }
+
+        btnScan.setOnClickListener {
+            val intent = Intent(requireContext(), ScanActivity::class.java)
+            startActivity(intent)
+        }
+
 
         return root
     }

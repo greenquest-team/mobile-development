@@ -8,7 +8,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="light_green">#FEFAE0</color>
-    
+
+    <color name="btn_scan_inactive">#D4EBD8</color>
+    <color name="btn_scan_active">#374722</color>
+
     <color name="green_700">#94A684</color>
     <color name="brown_700">#741D3A</color>
 </resources>
