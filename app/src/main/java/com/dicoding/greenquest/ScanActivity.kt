@@ -39,6 +39,12 @@ class ScanActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityScanBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.btnResetScan.setOnClickListener {
+            startCamera()
+            binding.btnResetScan.visibility = View.GONE
+            binding.overlay.clear()
+        }
     }
 
     override fun onResume() {
@@ -65,13 +71,6 @@ class ScanActivity : AppCompatActivity() {
                                 binding.overlay.setResults(
                                     results, imageHeight, imageWidth
                                 )
-
-                                val detectedLabels = it.mapNotNull { detection ->
-                                    detection.categories.firstOrNull()?.label
-                                }
-
-                                // Update tombol dinamis
-                                updateButtons(detectedLabels)
 //
                             } else {
                                 binding.overlay.clear()
@@ -86,6 +85,23 @@ class ScanActivity : AppCompatActivity() {
                 }
             }
         )
+
+        binding.overlay.setOnBoxClickListener(object : OverlayView.OnBoxClickListener {
+            override fun onBoxClicked(detection: Detection) {
+                // Jalankan stopCamera saat kotak diklik
+                stopCamera()
+                binding.btnResetScan.visibility = View.VISIBLE
+
+                // Tampilkan informasi kotak yang diklik
+                val label = detection.categories[0].label
+                val score = detection.categories[0].score
+                Toast.makeText(
+                    this@ScanActivity,
+                    "Kotak '$label' dengan skor ${score * 100}% diklik",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        })
 
 
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
@@ -130,52 +146,6 @@ class ScanActivity : AppCompatActivity() {
                 Log.e(TAG, "startCamera: ${exc.message}")
             }
         }, ContextCompat.getMainExecutor(this))
-    }
-
-    private fun updateButtons(detections: List<String>) {
-        val buttonContainer = binding.buttonContainer
-        buttonContainer.removeAllViews() // Hapus tombol lama
-
-
-        var isCameraActive = true // Untuk melacak status kamera
-        val activeColor = ContextCompat.getColor(this@ScanActivity, R.color.btn_scan_active)
-        val defaultColor = ContextCompat.getColor(this@ScanActivity, R.color.btn_scan_inactive)
-
-        var lastClickedButton: android.widget.Button? = null
-
-        for (label in detections) {
-            val button = android.widget.Button(this).apply {
-                text = label
-                setBackgroundColor(defaultColor) // Warna awal tombol
-
-                setOnClickListener {
-                    // Jika kamera aktif, matikan kamera dan ubah warna tombol
-                    if (isCameraActive) {
-                        stopCamera()
-                        binding.view.visibility = View.VISIBLE
-                        isCameraActive = false
-                        setBackgroundColor(activeColor)
-
-                        lastClickedButton?.setBackgroundColor(activeColor)
-
-                        lastClickedButton = this
-
-                    } else {
-                        // Jika kamera tidak aktif, nyalakan kamera dan kembalikan warna tombol
-                        startCamera()
-                        binding.view.visibility = View.GONE
-                        isCameraActive = true
-                        setBackgroundColor(defaultColor)
-
-                        setBackgroundColor(defaultColor)
-
-                        // Reset tombol terakhir yang aktif
-                        lastClickedButton = null
-                    }
-                }
-            }
-            buttonContainer.addView(button)
-        }
     }
 
     private fun stopCamera() {
