@@ -2,9 +2,8 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <solid android:color="@color/green_700" /> <!-- Warna background -->
     <corners
-        android:radius="50dp"
-        android:topLeftRadius="50dp"
-        android:topRightRadius="50dp"
+        android:topLeftRadius="300dp"
+        android:topRightRadius="300dp"
         android:bottomLeftRadius="0dp"
         android:bottomRightRadius="0dp"
         />         <!-- Radius sudut -->

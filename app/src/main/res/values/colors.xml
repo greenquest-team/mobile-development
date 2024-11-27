@@ -12,6 +12,9 @@
     <color name="btn_scan_inactive">#D4EBD8</color>
     <color name="btn_scan_active">#374722</color>
 
-    <color name="green_700">#94A684</color>
+    <color name="card_text_all">#325838</color>
+<color name="yellow">#F6CF0F</color>
+    <color name="green_700">#354E35</color>
     <color name="brown_700">#741D3A</color>
+    <color name="white_nav_bottom">#FEFAE0</color>
 </resources>

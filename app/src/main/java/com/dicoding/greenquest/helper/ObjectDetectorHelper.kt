@@ -122,6 +122,6 @@ class ObjectDetectorHelper (
     }
 
     companion object {
-        private const val TAG = "ImageClassifierHelper"
+        private const val TAG = "ObjectDetectorHelper"
     }
 }

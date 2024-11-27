@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
@@ -14,13 +13,8 @@ import androidx.camera.core.resolutionselector.AspectRatioStrategy
 import androidx.camera.core.resolutionselector.ResolutionSelector
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.lifecycleScope
 import com.dicoding.greenquest.databinding.ActivityScanBinding
 import com.dicoding.greenquest.helper.ObjectDetectorHelper
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import org.tensorflow.lite.task.vision.detector.Detection
 import java.util.concurrent.Executors
 
@@ -44,12 +38,25 @@ class ScanActivity : AppCompatActivity() {
             startCamera()
             binding.btnResetScan.visibility = View.GONE
             binding.overlay.clear()
+            viewCardTextClose()
         }
     }
 
     override fun onResume() {
         super.onResume()
         startCamera()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        // Pastikan kamera dihentikan saat aktivitas dihentikan sementara
+        stopCamera()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        // Bersihkan resource yang digunakan
+        stopCamera()
     }
 
     private fun startCamera() {
@@ -91,6 +98,7 @@ class ScanActivity : AppCompatActivity() {
                 // Jalankan stopCamera saat kotak diklik
                 stopCamera()
                 binding.btnResetScan.visibility = View.VISIBLE
+                viewCardTextShow()
 
                 // Tampilkan informasi kotak yang diklik
                 val label = detection.categories[0].label
@@ -150,5 +158,21 @@ class ScanActivity : AppCompatActivity() {
 
     private fun stopCamera() {
         ProcessCameraProvider.getInstance(this).get().unbindAll()
+    }
+
+    private fun viewCardTextShow() {
+        binding.allTextCard.visibility = View.VISIBLE
+        binding.greenCard.visibility = View.VISIBLE
+        binding.pinkCard.visibility = View.VISIBLE
+        binding.tvGreenCard.visibility = View.VISIBLE
+        binding.tvPinkCard.visibility = View.VISIBLE
+    }
+
+    private fun viewCardTextClose() {
+        binding.allTextCard.visibility = View.GONE
+        binding.greenCard.visibility = View.GONE
+        binding.pinkCard.visibility = View.GONE
+        binding.tvGreenCard.visibility = View.GONE
+        binding.tvPinkCard.visibility = View.GONE
     }
 }

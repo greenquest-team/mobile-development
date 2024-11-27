@@ -1,7 +1,6 @@
-package com.dicoding.greenquest.ui.home
+package com.dicoding.greenquest.ui.main
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
@@ -9,12 +8,10 @@ import com.dicoding.greenquest.data.Repository
 import com.dicoding.greenquest.data.local.entity.UserEntity
 import kotlinx.coroutines.launch
 
-class HomeViewModel(private val repository: Repository) : ViewModel() {
-
-    private val _text = MutableLiveData<String>().apply {
-        value = "Click to Scan"
+class MainViewModel(private val repository: Repository) : ViewModel() {
+    fun getSession(): LiveData<UserEntity> {
+        return repository.getSession().asLiveData()
     }
-    val text: LiveData<String> = _text
 
     fun logout() {
         viewModelScope.launch {
