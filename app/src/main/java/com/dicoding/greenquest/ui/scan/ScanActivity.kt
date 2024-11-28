@@ -1,10 +1,10 @@
-package com.dicoding.greenquest
+package com.dicoding.greenquest.ui.scan
 
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
@@ -13,10 +13,13 @@ import androidx.camera.core.resolutionselector.AspectRatioStrategy
 import androidx.camera.core.resolutionselector.ResolutionSelector
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import com.dicoding.greenquest.OverlayView
+import com.dicoding.greenquest.ViewModelFactory
 import com.dicoding.greenquest.databinding.ActivityScanBinding
 import com.dicoding.greenquest.helper.ObjectDetectorHelper
 import org.tensorflow.lite.task.vision.detector.Detection
 import java.util.concurrent.Executors
+import com.dicoding.greenquest.data.Result
 
 class ScanActivity : AppCompatActivity() {
 
@@ -24,10 +27,17 @@ class ScanActivity : AppCompatActivity() {
         const val TAG = "CameraActivity"
     }
 
+    private val showViewModel by viewModels<ScanViewModel> {
+        ViewModelFactory.getInstance(this)
+    }
+
     private lateinit var binding: ActivityScanBinding
     private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
     private lateinit var objectDetectorHelper: ObjectDetectorHelper
+
+    private lateinit var label: String
+    private var isCameraRunning: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +49,7 @@ class ScanActivity : AppCompatActivity() {
             binding.btnResetScan.visibility = View.GONE
             binding.overlay.clear()
             viewCardTextClose()
+            showLoading(false)
         }
     }
 
@@ -60,6 +71,8 @@ class ScanActivity : AppCompatActivity() {
     }
 
     private fun startCamera() {
+        isCameraRunning = true
+
         objectDetectorHelper = ObjectDetectorHelper(
             context = this,
             detectorListener = object : ObjectDetectorHelper.DetectorListener {
@@ -95,19 +108,19 @@ class ScanActivity : AppCompatActivity() {
 
         binding.overlay.setOnBoxClickListener(object : OverlayView.OnBoxClickListener {
             override fun onBoxClicked(detection: Detection) {
+                if (!isCameraRunning) {
+                    // Jika kamera tidak aktif, abaikan klik
+                    return
+                }
+
                 // Jalankan stopCamera saat kotak diklik
                 stopCamera()
                 binding.btnResetScan.visibility = View.VISIBLE
-                viewCardTextShow()
 
                 // Tampilkan informasi kotak yang diklik
-                val label = detection.categories[0].label
-                val score = detection.categories[0].score
-                Toast.makeText(
-                    this@ScanActivity,
-                    "Kotak '$label' dengan skor ${score * 100}% diklik",
-                    Toast.LENGTH_SHORT
-                ).show()
+                label = detection.categories[0].label
+
+                viewCardTextShow()
             }
         })
 
@@ -145,27 +158,51 @@ class ScanActivity : AppCompatActivity() {
                     imageAnalyzer
                 )
 
-            } catch (exc: Exception) {
-                Toast.makeText(
-                    this@ScanActivity,
-                    "Gagal memunculkan kamera.",
-                    Toast.LENGTH_SHORT
-                ).show()
-                Log.e(TAG, "startCamera: ${exc.message}")
+            } catch (e: Exception) {
+                showToast("Gagal memunculkan kamera.")
             }
         }, ContextCompat.getMainExecutor(this))
     }
 
     private fun stopCamera() {
+        isCameraRunning = false
         ProcessCameraProvider.getInstance(this).get().unbindAll()
+        binding.overlay.setOnBoxClickListener(null)
     }
 
     private fun viewCardTextShow() {
-        binding.allTextCard.visibility = View.VISIBLE
-        binding.greenCard.visibility = View.VISIBLE
-        binding.pinkCard.visibility = View.VISIBLE
-        binding.tvGreenCard.visibility = View.VISIBLE
-        binding.tvPinkCard.visibility = View.VISIBLE
+
+        label = "plastic"
+
+        showViewModel.randomWasteType(label).observe(this) { result ->
+            when (result) {
+                is Result.Loading -> {
+                    showLoading(true)
+                }
+
+                is Result.Success -> {
+                    showLoading(false)
+                    showToast(" materi $label, berhasil di get. Silahkan scroll ke bawah")
+                    val randomItem = result.data
+
+                    binding.allTextCard.visibility = View.VISIBLE
+                    binding.greenCard.visibility = View.VISIBLE
+                    binding.pinkCard.visibility = View.VISIBLE
+                    binding.tvGreenCard.visibility = View.VISIBLE
+                    binding.tvPinkCard.visibility = View.VISIBLE
+
+                    binding.tvGreenCard.text = randomItem.description
+                    binding.tvPinkCard.text = randomItem.craft
+
+                    Log.d("RandomWaste", "Type Name: ${randomItem.typeName}")
+                }
+
+                is Result.Error -> {
+                    showLoading(false)
+                    Log.e("RandomWaste", "Error: ${result.error}")
+                }
+            }
+        }
     }
 
     private fun viewCardTextClose() {
@@ -174,5 +211,14 @@ class ScanActivity : AppCompatActivity() {
         binding.pinkCard.visibility = View.GONE
         binding.tvGreenCard.visibility = View.GONE
         binding.tvPinkCard.visibility = View.GONE
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.viewLoading.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

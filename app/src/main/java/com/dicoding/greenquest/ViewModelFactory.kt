@@ -8,6 +8,7 @@ import com.dicoding.greenquest.di.Injection
 import com.dicoding.greenquest.ui.home.HomeViewModel
 import com.dicoding.greenquest.ui.login.LoginViewModel
 import com.dicoding.greenquest.ui.main.MainViewModel
+import com.dicoding.greenquest.ui.scan.ScanViewModel
 
 class ViewModelFactory(private val repository: Repository) : ViewModelProvider.NewInstanceFactory() {
 
@@ -22,6 +23,9 @@ class ViewModelFactory(private val repository: Repository) : ViewModelProvider.N
             }
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
                 HomeViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(ScanViewModel::class.java) -> {
+                ScanViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

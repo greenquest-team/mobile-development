@@ -149,7 +149,7 @@ class OverlayView @JvmOverloads constructor (
         return true // Indikasikan bahwa event telah ditangani
     }
 
-    fun setOnBoxClickListener(listener: OnBoxClickListener) {
+    fun setOnBoxClickListener(listener: OnBoxClickListener?) {
         this.onBoxClickListener = listener
     }
 

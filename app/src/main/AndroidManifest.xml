@@ -30,7 +30,7 @@
             android:name=".WelcomeActivity"
             android:exported="false" />
         <activity
-            android:name=".ScanActivity"
+            android:name=".ui.scan.ScanActivity"
             android:exported="false" />
         <activity
             android:name=".ui.main.MainActivity"

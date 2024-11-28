@@ -14,7 +14,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.dicoding.greenquest.R
-import com.dicoding.greenquest.ScanActivity
 import com.dicoding.greenquest.ViewModelFactory
 import com.dicoding.greenquest.databinding.ActivityMainBinding
 import com.dicoding.greenquest.ui.login.LoginActivity
@@ -51,6 +50,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        binding = ActivityMainBinding.inflate(layoutInflater)
+
         viewModel.getSession().observe(this) { user ->
             if (!user.isLogin) {
                 // Jika belum login, langsung arahkan ke LoginActivity
@@ -64,7 +65,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupView() {
-        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         if (!allPermissionsGranted()) {
