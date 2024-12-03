@@ -75,11 +75,12 @@ dependencies {
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
 
-
     //to make rounded image view
     implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation("com.eightbitlab:blurview:1.6.6") //blur view
     implementation("com.mikhaellopez:circularprogressbar:3.1.0") //progress bar-circle
+
+    implementation("com.google.android.material:material:1.9.0")
 
     implementation(libs.tensorflow.lite)
     implementation(libs.tensorflow.lite.api)

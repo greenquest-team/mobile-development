@@ -3,7 +3,6 @@
     <string name="title_home">Home</string>
     <string name="title_leaderboard">Leaderboard</string>
     <string name="title_profiles">Profiles</string>
-
     <string name="greetings_name">Halo, Ray!</string>
     <string name="greetings_question">sudah buang sampah hari ini?</string>
     <string name="misi_title">Hai Quessers, ayo lanjutkan misimu!</string>
@@ -14,11 +13,17 @@
     <string name="selamat_kamu_naik_peringkat">Selamat, kamu naik\nperingkat!</string>
     <string name="progressmu_sampai_mana">Progressmu sampai mana?</string>
 
-    
+
     <string name="btn_scan">Scan</string>
 
     <string name="tflitevision_is_not_initialized_yet">TfLiteVision is not initialized yet</string>
 
     <string name="test">Test 123</string>
 
+    <string name="cek_leaderboard">cek leaderboard</string>
+    <string name="lihat">lihat</string>
+    <string name="history">History</string>
+    <string name="profile">Profile</string>
+    <string name="ray">Ray</string>
+    <string name="leaderboard">Leaderboard</string>
 </resources>
