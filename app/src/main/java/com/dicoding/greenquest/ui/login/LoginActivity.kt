@@ -2,15 +2,11 @@ package com.dicoding.greenquest.ui.login
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.dicoding.greenquest.R
 import com.dicoding.greenquest.ViewModelFactory
-import com.dicoding.greenquest.data.local.entity.UserEntity
+import com.dicoding.greenquest.data.prefs.UserModel
 import com.dicoding.greenquest.databinding.ActivityLoginBinding
 import com.dicoding.greenquest.ui.main.MainActivity
 import com.dicoding.greenquest.ui.register.RegisterActivity
@@ -32,7 +28,7 @@ class LoginActivity : AppCompatActivity() {
 
         binding.loginButton.setOnClickListener {
             val email = binding.emailEditText.text.toString()
-            viewModel.saveSession(UserEntity(randomInt,"test123",email, "","sample_token"))
+            viewModel.saveSession(UserModel(randomInt,"test123",email, "","sample_token"))
             AlertDialog.Builder(this).apply {
                 setTitle("Yeah!")
                 setMessage("Anda berhasil login. Sudah tidak sabar untuk belajar ya?")

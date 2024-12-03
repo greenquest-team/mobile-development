@@ -1,11 +1,9 @@
 package com.dicoding.greenquest.data
 
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
-import com.dicoding.greenquest.ui.scan.ScanActivity
-import com.dicoding.greenquest.data.local.entity.UserEntity
+import com.dicoding.greenquest.data.prefs.UserModel
 import com.dicoding.greenquest.data.prefs.UserPreference
 import com.dicoding.greenquest.data.remote.response.PayloadItem
 import com.dicoding.greenquest.data.remote.retrofit.ApiService
@@ -13,11 +11,11 @@ import kotlinx.coroutines.flow.Flow
 
 class Repository private constructor( private val userPreference: UserPreference, private val apiService: ApiService){
 
-    suspend fun saveSession(user: UserEntity) {
+    suspend fun saveSession(user: UserModel) {
         userPreference.saveSession(user)
     }
 
-    fun getSession(): Flow<UserEntity> {
+    fun getSession(): Flow<UserModel> {
         return userPreference.getSession()
     }
 

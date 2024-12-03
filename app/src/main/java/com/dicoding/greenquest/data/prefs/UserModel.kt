@@ -1,6 +1,6 @@
-package com.dicoding.greenquest.data.local.entity
+package com.dicoding.greenquest.data.prefs
 
-data class UserEntity(
+data class UserModel(
     val user_id: Int,
     val name: String,
     val email: String,

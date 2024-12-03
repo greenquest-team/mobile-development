@@ -2,25 +2,16 @@ package com.dicoding.greenquest.helper
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.os.Build
 import android.os.SystemClock
 import android.util.Log
 import androidx.camera.core.ImageProxy
 import com.dicoding.greenquest.R
-import org.tensorflow.lite.DataType
-import org.tensorflow.lite.Interpreter
-import org.tensorflow.lite.gpu.GpuDelegate
-import org.tensorflow.lite.support.common.ops.CastOp
 import org.tensorflow.lite.support.image.ImageProcessor
 import org.tensorflow.lite.support.image.TensorImage
-import org.tensorflow.lite.support.image.ops.ResizeOp
 import org.tensorflow.lite.support.image.ops.Rot90Op
 import org.tensorflow.lite.task.core.BaseOptions
 import org.tensorflow.lite.task.vision.detector.Detection
 import org.tensorflow.lite.task.vision.detector.ObjectDetector
-import java.io.FileInputStream
-import java.nio.ByteBuffer
-
 class ObjectDetectorHelper (
     var threshold: Float = 0.5f,
     var maxResults: Int = 5,
@@ -84,10 +75,6 @@ class ObjectDetectorHelper (
 
         val tensorImage = imageProcessor.process(TensorImage.fromBitmap(toBitmap(image)))
 
-//        val imageProcessingOptions = ImageProcessingOptions.builder()
-//            .setOrientation(getOrientationFromRotation(image.imageInfo.rotationDegrees))
-//            .build()
-
         var inferenceTime = SystemClock.uptimeMillis()
         val results = objectDetector?.detect(tensorImage)
         inferenceTime = SystemClock.uptimeMillis() - inferenceTime
@@ -98,17 +85,6 @@ class ObjectDetectorHelper (
             tensorImage.width
         )
     }
-
-//    private fun getOrientationFromRotation(rotationDegrees: Int): ImageProcessingOptions.Orientation {
-//
-//        return when (rotationDegrees) {
-//            Surface.ROTATION_270 -> ImageProcessingOptions.Orientation.BOTTOM_RIGHT
-//            Surface.ROTATION_180 -> ImageProcessingOptions.Orientation.RIGHT_BOTTOM
-//            Surface.ROTATION_90 -> ImageProcessingOptions.Orientation.TOP_LEFT
-//            else -> ImageProcessingOptions.Orientation.RIGHT_TOP
-//        }
-//
-//    }
 
     private fun toBitmap(image: ImageProxy): Bitmap {
         val bitmapBuffer = Bitmap.createBitmap(

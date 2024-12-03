@@ -7,7 +7,6 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.dicoding.greenquest.data.local.entity.UserEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlin.random.Random
@@ -17,7 +16,7 @@ val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "se
 val randomInt = Random.nextInt(1, 100)
 class UserPreference private constructor(private val dataStore: DataStore<Preferences>) {
 
-    suspend fun saveSession(user: UserEntity) {
+    suspend fun saveSession(user: UserModel) {
         dataStore.edit { preferences ->
             randomInt
             preferences[USER] = user.name
@@ -28,11 +27,11 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
         }
     }
 
-    fun getSession(): Flow<UserEntity> {
+    fun getSession(): Flow<UserModel> {
 
 
         return dataStore.data.map { preferences ->
-            UserEntity(
+            UserModel(
                 randomInt,
                 preferences[USER] ?: "",
                 preferences[EMAIL_KEY] ?:"",
