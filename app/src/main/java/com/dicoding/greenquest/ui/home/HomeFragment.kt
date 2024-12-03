@@ -1,22 +1,17 @@
 package com.dicoding.greenquest.ui.home
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.dicoding.greenquest.ScanActivity
+import com.dicoding.greenquest.R
 import com.dicoding.greenquest.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -30,16 +25,20 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-//        contoh aja
-        val btnScan: TextView = binding.button
+        // Observasi data dari ViewModel
         homeViewModel.text.observe(viewLifecycleOwner) {
-            btnScan.text = it
+            binding.btnLihat.text = it
         }
 
-        btnScan.setOnClickListener {
-            val intent = Intent(requireContext(), ScanActivity::class.java)
-            startActivity(intent)
-        }
+        // Aksi pada tombol "Lihat"
+//        binding.btnLihat.setOnClickListener {
+//            val intent = Intent(requireContext(), ScanActivity::class.java)
+//            startActivity(intent)
+//        }
+
+        // Tambahkan logika lainnya untuk elemen seperti avatar, logo, dsb.
+        binding.ivLogo.setImageResource(R.drawable.greenquest_logo_edited_transparent)
+        binding.ivAvatar.setImageResource(R.drawable.ic_person_24) // Contoh jika ada gambar avatar
 
         return root
     }
