@@ -4,16 +4,184 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_radial_yellow"
     tools:context=".ui.home.HomeFragment">
 
-    <Button
-        android:id="@+id/button"
+    <!-- ImageView untuk logo Greenquest -->
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="151dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/greenquest_logo_edited_transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <!-- CircleImageView untuk avatar -->
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ivAvatar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:translationZ="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.106"
+        tools:src="@tools:sample/avatars" />
+
+    <!-- TextView untuk salam -->
+    <TextView
+        android:id="@+id/tvUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btn_scan"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/gabarito_bold"
+        android:text="@string/greetings_name"
+        android:textColor="#000000"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:translationZ="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivAvatar"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <!-- TextView untuk pertanyaan -->
+    <TextView
+        android:id="@+id/tvQuestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/gabarito_regular"
+        android:text="@string/greetings_question"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:translationZ="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvUsername" />
+
+    <!-- View untuk bottom sheet -->
+    <View
+        android:id="@+id/vBottomSheet"
+        android:layout_width="match_parent"
+        android:layout_height="580dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/bottom_sheet"
+        android:elevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tvQuestion"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <View
+        android:id="@+id/congratsPeringkat"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/card_light_green"
+        android:elevation="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/vBottomSheet"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/tvMisiTitle"
+        android:layout_width="212dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/gabarito_regular"
+        android:gravity="center_vertical"
+        android:text="@string/misi_title"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:translationZ="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/congratsPeringkat"
+        app:layout_constraintEnd_toEndOf="@+id/congratsPeringkat"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/congratsPeringkat"
+        app:layout_constraintTop_toTopOf="@+id/congratsPeringkat"
+        app:layout_constraintVertical_bias="0.50" />
+
+    <TextView
+        android:id="@+id/tvQuestTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:elevation="12dp"
+        android:fontFamily="@font/gabarito_bold"
+        android:text="@string/title_quest_hari_ini"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnLihat"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <com.mikhaellopez.circularprogressbar.CircularProgressBar
+        android:id="@+id/circularProgressBar"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:translationZ="12dp"
+        app:cpb_background_progressbar_color="#000000"
+        app:cpb_background_progressbar_width="5dp"
+        app:cpb_progress_direction="to_right"
+        app:cpb_progressbar_color="#3f51b5"
+        app:cpb_progressbar_width="10dp"
+        app:cpb_round_border="false"
+        app:layout_constraintBottom_toBottomOf="@+id/congratsPeringkat"
+        app:layout_constraintEnd_toEndOf="@+id/congratsPeringkat"
+        app:layout_constraintStart_toEndOf="@+id/tvMisiTitle"
+        app:layout_constraintTop_toTopOf="@+id/congratsPeringkat"
+        app:layout_constraintVertical_bias="0.50" />
+
+    <Button
+        android:id="@+id/btnLihat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="null"
+        android:drawableEnd="@drawable/arrow_right"
+        android:fontFamily="@font/gabarito_bold"
+        android:text="@string/lihat"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:translationZ="12dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/congratsPeringkat" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:translationZ="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvQuestTitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
