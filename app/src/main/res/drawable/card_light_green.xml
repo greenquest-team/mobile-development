@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="#ECD58D" /> <!-- Warna background -->
+    <solid android:color="#ABC803" /> <!-- Warna background -->
     <corners
         android:radius="50dp"
         android:topLeftRadius="20dp"

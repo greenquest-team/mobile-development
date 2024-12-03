@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".ui.home.HomeFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FEFAE0">
+
+
+        <ImageView
+            android:id="@+id/ivMateri"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="64dp"
+            android:src="@tools:sample/avatars"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnBack" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBack"
+            style="@style/LeftCornerShape"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="#F6CF0F"
+            android:drawableLeft="@drawable/arrow_left_black"
+            android:fontFamily="@font/gabarito_bold"
+            android:textColor="#3A3128"
+            android:text="Quesers Book"
+            android:elevation="8dp"
+            android:textSize="32dp"
+            android:textAllCaps="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvMateriTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:text="Tahukah Kamu"
+            android:fontFamily="@font/gabarito_bold"
+            android:textColor="@color/black"
+            android:textSize="28sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivMateri" />
+
+        <TextView
+            android:id="@+id/tvMateriDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:text="Sampah yang sering kita jumpai seperti, daun kering, kulit buah, ranting kering, dan potongan kayu merupakan sampah yang berasal dari tumbuhan! Sampah yang berasal dari tumbuhan merupakan sampah organik yang dapat dibuang di tempat sampah berwarna hijau."
+            android:textSize="20sp"
+            android:fontFamily="@font/gabarito_regular"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvMateriTitle" />
+
+        <Button
+            android:id="@+id/btnMateriSelesaiMembaca"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:text="selesai membaca"
+            android:textSize="18sp"
+            android:textColor="#FEFAE0"
+            android:fontFamily="@font/gabarito_bold"
+            android:textAllCaps="false"
+            android:backgroundTint="#354E35"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvMateriDesc" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

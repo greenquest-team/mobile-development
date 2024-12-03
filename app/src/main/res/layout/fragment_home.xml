@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FEFAE0"
+    android:background="@drawable/gradient_radial_yellow"
     tools:context=".ui.home.HomeFragment">
 
     <!-- ImageView untuk logo Greenquest -->
@@ -28,7 +27,7 @@
         android:id="@+id/ivAvatar"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:elevation="8dp"
+        android:translationZ="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -43,12 +42,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:elevation="8dp"
         android:fontFamily="@font/gabarito_bold"
         android:text="@string/greetings_name"
         android:textColor="#000000"
         android:textSize="25sp"
         android:textStyle="bold"
+        android:translationZ="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -62,34 +61,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:elevation="8dp"
         android:fontFamily="@font/gabarito_regular"
         android:text="@string/greetings_question"
         android:textColor="#000000"
         android:textSize="20sp"
+        android:translationZ="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvUsername" />
 
-    <View
-        android:layout_width="500dp"
-        android:layout_height="500dp"
-        android:layout_gravity="center"
-        android:background="@drawable/blur_circle"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.35" />
-
     <!-- View untuk bottom sheet -->
     <View
-        android:id="@+id/view"
-        android:layout_width="415dp"
+        android:id="@+id/vBottomSheet"
+        android:layout_width="match_parent"
         android:layout_height="580dp"
-        android:elevation="8dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/bottom_sheet"
+        android:elevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -98,33 +86,34 @@
 
     <View
         android:id="@+id/congratsPeringkat"
-        android:layout_width="380dp"
+        android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:elevation="12dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
-        android:background="@drawable/card_misi"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/card_light_green"
+        android:elevation="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/vBottomSheet"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/tvMisiTitle"
         android:layout_width="212dp"
         android:layout_height="88dp"
-        android:layout_marginStart="32dp"
-        android:elevation="12dp"
-        android:fontFamily="@font/gabarito_bold"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/gabarito_regular"
         android:gravity="center_vertical"
         android:text="@string/misi_title"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:textSize="24sp"
-        android:textStyle="bold"
+        android:translationZ="12dp"
         app:layout_constraintBottom_toBottomOf="@+id/congratsPeringkat"
         app:layout_constraintEnd_toEndOf="@+id/congratsPeringkat"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/congratsPeringkat"
         app:layout_constraintTop_toTopOf="@+id/congratsPeringkat"
         app:layout_constraintVertical_bias="0.50" />
 
@@ -143,15 +132,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/btnLihat"
         app:layout_constraintVertical_bias="0.0" />
 
     <com.mikhaellopez.circularprogressbar.CircularProgressBar
         android:id="@+id/circularProgressBar"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:elevation="12dp"
-        app:cpb_background_progressbar_color="#b6bbd8"
+        android:translationZ="12dp"
+        app:cpb_background_progressbar_color="#000000"
         app:cpb_background_progressbar_width="5dp"
         app:cpb_progress_direction="to_right"
         app:cpb_progressbar_color="#3f51b5"
@@ -163,22 +152,36 @@
         app:layout_constraintTop_toTopOf="@+id/congratsPeringkat"
         app:layout_constraintVertical_bias="0.50" />
 
-    <TextView
-        android:id="@+id/textView"
+    <Button
+        android:id="@+id/btnLihat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
-        android:clickable="true"
-        android:elevation="12dp"
-        android:fontFamily="@font/gabarito_medium"
-        android:text="lihat"
+        android:layout_marginEnd="16dp"
+        android:background="null"
+        android:drawableEnd="@drawable/arrow_right"
+        android:fontFamily="@font/gabarito_bold"
+        android:text="@string/lihat"
+        android:textAllCaps="false"
         android:textColor="@color/black"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        android:textSize="16sp"
+        android:translationZ="12dp"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/congratsPeringkat" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:translationZ="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvQuestTitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

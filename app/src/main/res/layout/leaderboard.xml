@@ -76,8 +76,8 @@
         android:layout_width="500dp"
         android:layout_height="500dp"
         android:layout_gravity="center"
-        android:background="@drawable/blur_circle"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
+        android:background="@drawable/circle_pink"
+        app:layout_constraintBottom_toBottomOf="@+id/vBottomSheet"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -85,7 +85,7 @@
 
     <!-- View untuk bottom sheet -->
     <View
-        android:id="@+id/view"
+        android:id="@+id/vBottomSheet"
         android:layout_width="415dp"
         android:layout_height="580dp"
         android:elevation="8dp"
@@ -113,7 +113,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/vBottomSheet"
         app:layout_constraintVertical_bias="0.0" />
 
     <ProgressBar
@@ -127,7 +127,7 @@
         android:progress="25"
         android:translationZ="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/vBottomSheet"
         app:layout_constraintTop_toBottomOf="@+id/tvQuestTitle" />
 
     <TextView
@@ -169,7 +169,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="102dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/card_misi"
+        android:background="@drawable/card_light_green"
         android:elevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
