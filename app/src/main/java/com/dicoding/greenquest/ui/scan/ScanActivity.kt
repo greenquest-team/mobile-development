@@ -1,11 +1,10 @@
-package com.dicoding.greenquest
+package com.dicoding.greenquest.ui.scan
 
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
@@ -14,15 +13,13 @@ import androidx.camera.core.resolutionselector.AspectRatioStrategy
 import androidx.camera.core.resolutionselector.ResolutionSelector
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.lifecycleScope
+import com.dicoding.greenquest.OverlayView
+import com.dicoding.greenquest.ViewModelFactory
 import com.dicoding.greenquest.databinding.ActivityScanBinding
 import com.dicoding.greenquest.helper.ObjectDetectorHelper
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import org.tensorflow.lite.task.vision.detector.Detection
 import java.util.concurrent.Executors
+import com.dicoding.greenquest.data.Result
 
 class ScanActivity : AppCompatActivity() {
 
@@ -30,15 +27,30 @@ class ScanActivity : AppCompatActivity() {
         const val TAG = "CameraActivity"
     }
 
+    private val showViewModel by viewModels<ScanViewModel> {
+        ViewModelFactory.getInstance(this)
+    }
+
     private lateinit var binding: ActivityScanBinding
     private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
     private lateinit var objectDetectorHelper: ObjectDetectorHelper
 
+    private lateinit var label: String
+    private var isCameraRunning: Boolean = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityScanBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.btnResetScan.setOnClickListener {
+            startCamera()
+            binding.btnResetScan.visibility = View.GONE
+            binding.overlay.clear()
+            viewCardTextClose()
+            showLoading(false)
+        }
     }
 
     override fun onResume() {
@@ -46,7 +58,21 @@ class ScanActivity : AppCompatActivity() {
         startCamera()
     }
 
+    override fun onPause() {
+        super.onPause()
+        // Pastikan kamera dihentikan saat aktivitas dihentikan sementara
+        stopCamera()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        // Bersihkan resource yang digunakan
+        stopCamera()
+    }
+
     private fun startCamera() {
+        isCameraRunning = true
+
         objectDetectorHelper = ObjectDetectorHelper(
             context = this,
             detectorListener = object : ObjectDetectorHelper.DetectorListener {
@@ -65,13 +91,6 @@ class ScanActivity : AppCompatActivity() {
                                 binding.overlay.setResults(
                                     results, imageHeight, imageWidth
                                 )
-
-                                val detectedLabels = it.mapNotNull { detection ->
-                                    detection.categories.firstOrNull()?.label
-                                }
-
-                                // Update tombol dinamis
-                                updateButtons(detectedLabels)
 //
                             } else {
                                 binding.overlay.clear()
@@ -86,6 +105,24 @@ class ScanActivity : AppCompatActivity() {
                 }
             }
         )
+
+        binding.overlay.setOnBoxClickListener(object : OverlayView.OnBoxClickListener {
+            override fun onBoxClicked(detection: Detection) {
+                if (!isCameraRunning) {
+                    // Jika kamera tidak aktif, abaikan klik
+                    return
+                }
+
+                // Jalankan stopCamera saat kotak diklik
+                stopCamera()
+                binding.btnResetScan.visibility = View.VISIBLE
+
+                // Tampilkan informasi kotak yang diklik
+                label = detection.categories[0].label
+
+                viewCardTextShow()
+            }
+        })
 
 
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
@@ -121,64 +158,67 @@ class ScanActivity : AppCompatActivity() {
                     imageAnalyzer
                 )
 
-            } catch (exc: Exception) {
-                Toast.makeText(
-                    this@ScanActivity,
-                    "Gagal memunculkan kamera.",
-                    Toast.LENGTH_SHORT
-                ).show()
-                Log.e(TAG, "startCamera: ${exc.message}")
+            } catch (e: Exception) {
+                showToast("Gagal memunculkan kamera.")
             }
         }, ContextCompat.getMainExecutor(this))
     }
 
-    private fun updateButtons(detections: List<String>) {
-        val buttonContainer = binding.buttonContainer
-        buttonContainer.removeAllViews() // Hapus tombol lama
+    private fun stopCamera() {
+        isCameraRunning = false
+        ProcessCameraProvider.getInstance(this).get().unbindAll()
+        binding.overlay.setOnBoxClickListener(null)
+    }
 
+    private fun viewCardTextShow() {
 
-        var isCameraActive = true // Untuk melacak status kamera
-        val activeColor = ContextCompat.getColor(this@ScanActivity, R.color.btn_scan_active)
-        val defaultColor = ContextCompat.getColor(this@ScanActivity, R.color.btn_scan_inactive)
+        label = "plastic"
 
-        var lastClickedButton: android.widget.Button? = null
+        showViewModel.randomWasteType(label).observe(this) { result ->
+            when (result) {
+                is Result.Loading -> {
+                    showLoading(true)
+                }
 
-        for (label in detections) {
-            val button = android.widget.Button(this).apply {
-                text = label
-                setBackgroundColor(defaultColor) // Warna awal tombol
+                is Result.Success -> {
+                    showLoading(false)
+                    showToast(" materi $label, berhasil di get. Silahkan scroll ke bawah")
+                    val randomItem = result.data
 
-                setOnClickListener {
-                    // Jika kamera aktif, matikan kamera dan ubah warna tombol
-                    if (isCameraActive) {
-                        stopCamera()
-                        binding.view.visibility = View.VISIBLE
-                        isCameraActive = false
-                        setBackgroundColor(activeColor)
+                    binding.allTextCard.visibility = View.VISIBLE
+                    binding.greenCard.visibility = View.VISIBLE
+                    binding.pinkCard.visibility = View.VISIBLE
+                    binding.tvGreenCard.visibility = View.VISIBLE
+                    binding.tvPinkCard.visibility = View.VISIBLE
 
-                        lastClickedButton?.setBackgroundColor(activeColor)
+                    binding.tvGreenCard.text = randomItem.description
+                    binding.tvPinkCard.text = randomItem.craft
 
-                        lastClickedButton = this
+                    Log.d("RandomWaste", "Type Name: ${randomItem.typeName}")
+                }
 
-                    } else {
-                        // Jika kamera tidak aktif, nyalakan kamera dan kembalikan warna tombol
-                        startCamera()
-                        binding.view.visibility = View.GONE
-                        isCameraActive = true
-                        setBackgroundColor(defaultColor)
-
-                        setBackgroundColor(defaultColor)
-
-                        // Reset tombol terakhir yang aktif
-                        lastClickedButton = null
-                    }
+                is Result.Error -> {
+                    showLoading(false)
+                    Log.e("RandomWaste", "Error: ${result.error}")
                 }
             }
-            buttonContainer.addView(button)
         }
     }
 
-    private fun stopCamera() {
-        ProcessCameraProvider.getInstance(this).get().unbindAll()
+    private fun viewCardTextClose() {
+        binding.allTextCard.visibility = View.GONE
+        binding.greenCard.visibility = View.GONE
+        binding.pinkCard.visibility = View.GONE
+        binding.tvGreenCard.visibility = View.GONE
+        binding.tvPinkCard.visibility = View.GONE
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.viewLoading.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

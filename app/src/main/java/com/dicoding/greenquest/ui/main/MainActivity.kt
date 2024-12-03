@@ -1,23 +1,33 @@
 package com.dicoding.greenquest
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.dicoding.greenquest.R
+import com.dicoding.greenquest.ViewModelFactory
 import com.dicoding.greenquest.databinding.ActivityMainBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.dicoding.greenquest.ui.login.LoginActivity
+import com.dicoding.greenquest.ui.main.MainViewModel
 
 class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
+    }
+
+    private val viewModel by viewModels<MainViewModel> {
+        ViewModelFactory.getInstance(this)
     }
 
     private lateinit var binding: ActivityMainBinding
@@ -43,6 +53,22 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+
+        viewModel.getSession().observe(this) { user ->
+            if (!user.isLogin) {
+                // Jika belum login, langsung arahkan ke LoginActivity
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish()
+            } else {
+                // Jika sudah login, baru tampilkan layout
+                setupView()
+            }
+        }
+    }
+
+    private fun setupView() {
         setContentView(binding.root)
 
         if (!allPermissionsGranted()) {

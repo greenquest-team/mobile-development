@@ -12,8 +12,7 @@
     <string name="informasi_pribadi">Informasi Pribadi</string>
     <string name="selamat_kamu_naik_peringkat">Selamat, kamu naik\nperingkat!</string>
     <string name="progressmu_sampai_mana">Progressmu sampai mana?</string>
-
-
+    
     <string name="btn_scan">Scan</string>
 
     <string name="tflitevision_is_not_initialized_yet">TfLiteVision is not initialized yet</string>
@@ -26,4 +25,11 @@
     <string name="profile">Profile</string>
     <string name="ray">Ray</string>
     <string name="leaderboard">Leaderboard</string>
+
+    <string name="reset_string_btn">Reset Scan</string>
+    <string name="email">Email :</string>
+    <string name="password">Password :</string>
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
+    <string name="welcome">Hey, berjumpa lagi! Apa kabarmu?</string>
 </resources>

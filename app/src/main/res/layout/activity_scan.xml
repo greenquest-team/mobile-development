@@ -3,35 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/light_green">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/light_green"
-        tools:context=".ScanActivity">
-
+        tools:context=".ui.scan.ScanActivity">
 
         <androidx.camera.view.PreviewView
             android:id="@+id/viewFinder"
             android:layout_width="0dp"
-            android:radius="10dp"
-            android:layout_height="550dp"
+            android:layout_height="500dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:radius="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.504"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView5" >
+            app:layout_constraintTop_toBottomOf="@+id/textView2" >
 
-            <View
-                android:id="@+id/view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/black"
-                android:visibility="gone" />
         </androidx.camera.view.PreviewView>
 
         <com.dicoding.greenquest.OverlayView
@@ -41,7 +34,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/viewFinder"
             app:layout_constraintEnd_toEndOf="@+id/viewFinder"
             app:layout_constraintStart_toStartOf="@+id/viewFinder"
-            app:layout_constraintTop_toTopOf="@+id/viewFinder" />
+            app:layout_constraintTop_toTopOf="@+id/viewFinder"
+            tools:visibility="visible" />
 
         <ImageView
             android:id="@+id/imageView4"
@@ -51,7 +45,8 @@
             android:layout_marginTop="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/img_1" />
+            app:srcCompat="@drawable/img_1"
+            tools:visibility="visible" />
 
         <ImageView
             android:id="@+id/imageView5"
@@ -60,23 +55,130 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView4"
-            app:srcCompat="@drawable/img_spark" />
+            app:srcCompat="@drawable/img_spark"
+            tools:visibility="visible" />
 
-        <LinearLayout
-            android:id="@+id/buttonContainer"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/btn_reset_scan"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
+            android:layout_marginTop="16dp"
+            android:text="@string/reset_string_btn"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewFinder"
+            tools:visibility="visible" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/all_text_card"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:background="@color/white"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="16dp"
+            android:visibility="gone"
+            app:cardBackgroundColor="@color/card_text_all"
+            app:cardCornerRadius="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/viewFinder" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_reset_scan"
+            tools:visibility="visible" />
+
+            <!-- Green Card -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/green_card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:visibility="gone"
+            app:cardBackgroundColor="@color/light_green"
+            app:cardCornerRadius="12dp"
+            app:layout_constraintEnd_toEndOf="@+id/all_text_card"
+            app:layout_constraintStart_toStartOf="@+id/all_text_card"
+            app:layout_constraintTop_toTopOf="@+id/all_text_card"
+            tools:visibility="visible" >
+
+            <TextView
+                android:id="@+id/tv_green_card"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="start"
+                android:padding="16dp"
+                android:visibility="gone"
+                android:text="Plastik merupakan......"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                tools:visibility="visible" />
+        </androidx.cardview.widget.CardView>
+
+            <!-- Pink Card -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/pink_card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:visibility="gone"
+            app:cardBackgroundColor="#E4B8C3"
+            app:cardCornerRadius="12dp"
+            app:layout_constraintEnd_toEndOf="@+id/all_text_card"
+            app:layout_constraintStart_toStartOf="@+id/all_text_card"
+            app:layout_constraintTop_toBottomOf="@+id/green_card"
+            tools:visibility="visible" >
+
+            <TextView
+                android:id="@+id/tv_pink_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:padding="16dp"
+                android:visibility="gone"
+                android:text="Kerajinan yang dapat dibuat dari plastik : lorem ipsum"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                tools:visibility="visible" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Silahkan klik &quot;kotak&quot; yang muncul di kamera"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
+
+        <View
+            android:id="@+id/view_loading"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/all_text_card"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:alpha="0.5"
+            tools:visibility="visible"/>
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/viewFinder"
+            tools:visibility="visible" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

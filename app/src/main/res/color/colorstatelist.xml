@@ -1,4 +1,4 @@
  <selector xmlns:android="http://schemas.android.com/apk/res/android">
-        <item android:color="@color/white" android:state_checked="true" /> <!-- Warna ikon aktif -->
-        <item android:color="@color/brown_700" android:state_checked="false" /> <!-- Warna ikon tidak aktif -->
+        <item android:color="@color/white_nav_bottom" android:state_checked="true" /> <!-- Warna ikon aktif -->
+        <item android:color="@color/white" android:alpha="0.5" android:state_checked="false" /> <!-- Warna ikon tidak aktif -->
  </selector>
