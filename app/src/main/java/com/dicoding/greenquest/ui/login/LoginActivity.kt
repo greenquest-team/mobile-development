@@ -27,7 +27,7 @@ class LoginActivity : AppCompatActivity() {
         val randomInt = Random.nextInt(1, 100)
 
         binding.loginButton.setOnClickListener {
-            val email = binding.emailEditText.text.toString()
+            val email = binding.usernameEditText.text.toString()
             viewModel.saveSession(UserModel(randomInt,"test123",email, "","sample_token"))
             AlertDialog.Builder(this).apply {
                 setTitle("Yeah!")
