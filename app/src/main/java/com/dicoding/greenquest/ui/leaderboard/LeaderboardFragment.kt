@@ -18,12 +18,9 @@ class LeaderboardFragment : Fragment() {
     private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this).get(LeaderboardViewModel::class.java)
+        val dashboardViewModel = ViewModelProvider(this).get(LeaderboardViewModel::class.java)
 
         _binding = FragmentLeaderboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
