@@ -76,7 +76,7 @@ dependencies {
     implementation(libs.androidx.room.ktx)
 
     //to make rounded image view
-    implementation(libs.circleimageview)
+    implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation(libs.circularprogressbar) //progress bar-circle
 
     implementation(libs.material)

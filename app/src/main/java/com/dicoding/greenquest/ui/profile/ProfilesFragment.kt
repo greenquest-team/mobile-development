@@ -26,7 +26,7 @@ class ProfilesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Example: Set username text dynamically
-        binding.tvUsername.text = "John Doe" // Replace with actual user data
+        binding.tvUsername.text = "Ray" // Replace with actual user data
 
         // Example: Set points count dynamically
         binding.pointsCount.text = "1200 Points" // Replace with actual points data

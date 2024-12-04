@@ -25,20 +25,11 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        // Observasi data dari ViewModel
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            binding.btnLihat.text = it
-        }
-
         // Aksi pada tombol "Lihat"
 //        binding.btnLihat.setOnClickListener {
 //            val intent = Intent(requireContext(), ScanActivity::class.java)
 //            startActivity(intent)
 //        }
-
-        // Tambahkan logika lainnya untuk elemen seperti avatar, logo, dsb.
-        binding.ivLogo.setImageResource(R.drawable.greenquest_logo_edited_transparent)
-        binding.ivAvatar.setImageResource(R.drawable.ic_person_24) // Contoh jika ada gambar avatar
 
         return root
     }
