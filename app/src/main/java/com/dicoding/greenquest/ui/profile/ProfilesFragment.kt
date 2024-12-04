@@ -26,13 +26,22 @@ class ProfilesFragment : Fragment() {
             ViewModelProvider(this).get(ProfilesViewModel::class.java)
 
         _binding = FragmentProfilesBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        return binding.root
+    }
 
-        val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Example: Set username text dynamically
+        binding.tvUsername.text = "John Doe" // Replace with actual user data
+
+        // Example: Set points count dynamically
+        binding.pointsCount.text = "1200 Points" // Replace with actual points data
+
+        // Example: Set click listener for the button
+        binding.button.setOnClickListener {
+            // Handle button click, e.g., navigate to leaderboard
         }
-        return root
     }
 
     override fun onDestroyView() {

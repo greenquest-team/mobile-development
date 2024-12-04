@@ -274,7 +274,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:background="null"
+            android:backgroundTint="#ABC803"
             android:drawableEnd="@drawable/arrow_right"
             android:fontFamily="@font/gabarito_bold"
             android:text="@string/lihat"

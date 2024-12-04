@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.dicoding.greenquest.ui.scan.ScanActivity
+import com.dicoding.greenquest.R
 import com.dicoding.greenquest.ViewModelFactory
 import com.dicoding.greenquest.databinding.FragmentHomeBinding
 
@@ -33,35 +34,19 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        // Akses elemen-elemen di layout XML melalui binding
-        binding.ivLogo  // ImageView untuk logo
-        binding.ivAvatar // CircleImageView untuk avatar
-        binding.tvWelcome // TextView untuk salam
-        binding.tvQuestion // TextView untuk pertanyaan
-        binding.view // View untuk bottom sheet
-        binding.misi // View untuk card misi
-        binding.tvMisiTitle // TextView untuk judul misi
-        binding.tvQuestTitle // TextView untuk judul quest
-        binding.circularProgressBar // CircularProgressBar
-        binding.textView // TextView "lihat"
-
-        // ... kode lainnya, seperti mengatur teks, event listener, dll. ...
-
-//        contoh aja
-        val btnScan: TextView = binding.button
+        // Observasi data dari ViewModel
         homeViewModel.text.observe(viewLifecycleOwner) {
-            btnScan.text = it
+            binding.btnLihat.text = it
         }
 
-        binding.logoutButton.setOnClickListener {
-            homeViewModel.logout()
-        }
-
-        btnScan.setOnClickListener {
-            val intent = Intent(requireContext(), ScanActivity::class.java)
-            startActivity(intent)
-        }
-
+        // Aksi pada tombol "Lihat"
+//        binding.btnLihat.setOnClickListener {
+//            val intent = Intent(requireContext(), ScanActivity::class.java)
+//            startActivity(intent)
+//        }
+        // Tambahkan logika lainnya untuk elemen seperti avatar, logo, dsb.
+        binding.ivLogo.setImageResource(R.drawable.greenquest_logo_edited_transparent)
+        binding.ivAvatar.setImageResource(R.drawable.ic_person_24) // Contoh jika ada gambar avatar
 
         return root
     }

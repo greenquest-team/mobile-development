@@ -23,13 +23,15 @@ class LeaderboardFragment : Fragment() {
         val dashboardViewModel = ViewModelProvider(this).get(LeaderboardViewModel::class.java)
 
         _binding = FragmentLeaderboardBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        return binding.root
+    }
 
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Contoh penggunaan binding untuk View di fragment_leaderboard.xml
+        binding.titleLeaderboard.text = "Leaderboard"
+        // ... binding untuk View lainnya ...
     }
 
     override fun onDestroyView() {
