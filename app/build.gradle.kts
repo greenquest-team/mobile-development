@@ -78,7 +78,6 @@ dependencies {
 
     //to make rounded image view
     implementation(libs.circleimageview)
-    implementation(libs.blurview) //blur view
     implementation(libs.circularprogressbar) //progress bar-circle
 
     implementation(libs.material)
