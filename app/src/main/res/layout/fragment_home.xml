@@ -8,10 +8,11 @@
     tools:context=".ui.home.HomeFragment">
 
     <!-- ImageView untuk logo Greenquest -->
+
     <ImageView
-        android:id="@+id/ivLogo"
-        android:layout_width="151dp"
-        android:layout_height="41dp"
+        android:id="@+id/imgLogoGreenQuest"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/greenquest_logo_edited_transparent"
@@ -23,22 +24,23 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <!-- CircleImageView untuk avatar -->
-    <de.hdodenhof.circleimageview.CircleImageView
+    <com.google.android.material.imageview.ShapeableImageView
+        app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
         android:id="@+id/ivAvatar"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:translationZ="8dp"
+        android:translationZ="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.106"
-        app:srcCompat="@drawable/ic_person_24" />
+        app:layout_constraintVertical_bias="0.100"
+        app:srcCompat="@drawable/test_image" />
 
     <!-- TextView untuk salam -->
     <TextView
-        android:id="@+id/tvUsername"
+        android:id="@+id/textUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -68,18 +70,20 @@
         android:translationZ="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvUsername" />
+        app:layout_constraintTop_toBottomOf="@+id/textUsername" />
 
     <!-- View untuk bottom sheet -->
+
     <View
         android:id="@+id/vBottomSheet"
         android:layout_width="match_parent"
-        android:layout_height="580dp"
+        android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/bottom_sheet"
         android:elevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvQuestion"
         app:layout_constraintVertical_bias="1.0" />
@@ -95,9 +99,10 @@
         android:elevation="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/vBottomSheet"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.050000012" />
 
     <TextView
         android:id="@+id/tvMisiTitle"
@@ -108,7 +113,7 @@
         android:gravity="center_vertical"
         android:text="@string/misi_title"
         android:textColor="#000000"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:translationZ="12dp"
         app:layout_constraintBottom_toBottomOf="@+id/congratsPeringkat"
         app:layout_constraintEnd_toEndOf="@+id/congratsPeringkat"
@@ -140,6 +145,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:translationZ="12dp"
+        android:elevation="2dp"
         app:cpb_background_progressbar_color="#000000"
         app:cpb_background_progressbar_width="5dp"
         app:cpb_progress_direction="to_right"
@@ -152,7 +158,21 @@
         app:layout_constraintTop_toTopOf="@+id/congratsPeringkat"
         app:layout_constraintVertical_bias="0.50" />
 
-    <Button
+
+    <TextView
+        android:id="@+id/progressText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0%"
+        android:textColor="#000"
+        android:textSize="24sp"
+        android:elevation="15dp"
+        app:layout_constraintTop_toTopOf="@+id/circularProgressBar"
+        app:layout_constraintBottom_toBottomOf="@+id/circularProgressBar"
+        app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
+        app:layout_constraintEnd_toEndOf="@+id/circularProgressBar" />
+
+    <TextView
         android:id="@+id/btnLihat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -166,7 +186,6 @@
         android:textColor="@color/black"
         android:textSize="16sp"
         android:translationZ="12dp"
-        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"

@@ -52,6 +52,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
 
         viewModel.getSession().observe(this) { user ->
             if (!user.isLogin) {
@@ -63,18 +65,19 @@ class MainActivity : AppCompatActivity() {
                 setupView()
             }
         }
-    }
-
-    private fun setupView() {
-        setContentView(binding.root)
-
-        if (!allPermissionsGranted()) {
-            requestPermissionLauncher.launch(REQUIRED_PERMISSION)
-        }
 
         val navView: BottomNavigationView = binding.navView
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
+
+        navView.setupWithNavController(navController)
+    }
+
+    private fun setupView() {
+        if (!allPermissionsGranted()) {
+            requestPermissionLauncher.launch(REQUIRED_PERMISSION)
+        }
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
@@ -82,11 +85,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_home, R.id.navigation_leaderboard, R.id.navigation_profiles
             )
         )
-//        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+//
 
-        val bottomNav = binding.navView
-//        bottomNav. = ContextCompat.getColorStateList(this, R.color.white)
     }
 
     private fun showToast(msg: String) {
