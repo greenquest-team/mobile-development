@@ -1,5 +1,6 @@
 package com.dicoding.greenquest.data.remote.retrofit
 
+import android.util.Log
 import com.dicoding.greenquest.BuildConfig
 import com.dicoding.greenquest.data.remote.ApiType
 import okhttp3.Interceptor
@@ -26,6 +27,7 @@ class ApiConfig {
                 HttpLoggingInterceptor.Level.NONE) }
             val authInterceptor = Interceptor { chain ->
                 val req = chain.request()
+                Log.d("APICONFIG", token!!)
                 val requestHeaders = req.newBuilder()
                     .addHeader("Authorization", "Bearer $token")
                     .build()
