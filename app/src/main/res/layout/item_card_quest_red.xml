@@ -15,33 +15,36 @@
         android:padding="16dp">
 
         <ImageView
-            android:id="@+id/card_image"
-            android:layout_width="match_parent"
+            android:id="@+id/cardImageQuest"
+            android:layout_width="150dp"
             android:layout_height="150dp"
             android:scaleType="centerCrop"
-            tools:src="@drawable/baseline_image_24" />
+            tools:src="@drawable/test_image_contoh_quest" />
 
         <TextView
-            android:id="@+id/card_title"
-            android:layout_width="wrap_content"
+            android:id="@+id/cardTitleQuest"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:ellipsize="end"
             android:layout_marginTop="8dp"
-            android:text="Judul Card"
-            android:textColor="@color/white"
             android:fontFamily="@font/gabarito_regular"
+            android:text="Memindai 3 sampah daun kering"
+            android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/card_button"
-            android:layout_width="wrap_content"
+            android:id="@+id/cardButtonQuest"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:fontFamily="@font/gabarito_bold"
             android:text="kerjakan"
             android:textColor="@color/black"
             android:textAllCaps="false"
             app:cornerRadius="20dp"
-            android:backgroundTint="#F6CF0F"/>
+            android:backgroundTint="#F6CF0F" />
 
     </LinearLayout>
 

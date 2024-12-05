@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@drawable/gradient_radial_green"
+    tools:context=".ui.home.HomeFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBack"
+            style="@style/LeftCornerShape"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="#F6CF0F"
+            android:drawableLeft="@drawable/arrow_left_16"
+            android:elevation="8dp"
+            android:fontFamily="@font/gabarito_bold"
+            android:text="Kembali"
+            android:textAllCaps="false"
+            android:textColor="#3A3128"
+            android:textSize="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivAvatar"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:translationZ="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.50"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnBack"
+            app:layout_constraintVertical_bias="0.0"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+            app:srcCompat="@drawable/test_image" />
+
+        <TextView
+            android:id="@+id/textUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/gabarito_bold"
+            android:text="Ayo atur profilemu!"
+            android:textColor="#000000"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:translationZ="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivAvatar"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <View
+            android:id="@+id/vBottomSheet"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bottom_sheet"
+            android:elevation="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textUsername"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/textTitleInformasiPribadi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:fontFamily="@font/gabarito_bold"
+            android:gravity="center_horizontal"
+            android:text="Informasi Pribadi"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:translationZ="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.50"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/upperLine" />
+
+        <TextView
+            android:id="@+id/textTitleNama"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:text="nama"
+            android:fontFamily="@font/gabarito_bold"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:translationZ="12dp"
+            app:layout_constraintBottom_toBottomOf="@+id/vBottomSheet"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textTitleInformasiPribadi"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputNama"
+            app:boxBackgroundColor="#FEFAE0"
+            app:boxStrokeColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-20dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:translationZ="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textTitleNama"
+            app:layout_constraintVertical_bias="0.0">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="#949494"
+                android:fontFamily="@font/gabarito_medium"
+                android:text="Ray" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/textTitleUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:text="username"
+            android:fontFamily="@font/gabarito_bold"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:translationZ="12dp"
+            app:layout_constraintBottom_toBottomOf="@+id/vBottomSheet"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputNama"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputUsername"
+            app:boxBackgroundColor="#FEFAE0"
+            app:boxStrokeColor="@color/black"
+            android:layout_marginTop="-20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:translationZ="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textTitleUsername"
+            app:layout_constraintVertical_bias="0.0">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="#949494"
+                android:fontFamily="@font/gabarito_medium"
+                android:text="ray123" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/textTitleEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:text="email"
+            android:fontFamily="@font/gabarito_bold"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:translationZ="12dp"
+            app:layout_constraintBottom_toBottomOf="@+id/vBottomSheet"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputUsername"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputEmail"
+            app:boxBackgroundColor="#FEFAE0"
+            app:boxStrokeColor="@color/black"
+            android:layout_marginTop="-20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:translationZ="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textTitleEmail"
+            app:layout_constraintVertical_bias="0.0">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#949494"
+                android:inputType="textEmailAddress"
+                android:fontFamily="@font/gabarito_medium"
+                android:text="ray@gmail.com" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/textTitleTanggalLahir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:text="tanggal lahir"
+            android:fontFamily="@font/gabarito_bold"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:translationZ="12dp"
+            app:layout_constraintBottom_toBottomOf="@+id/vBottomSheet"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputEmail"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputTanggalLahir"
+            app:boxBackgroundColor="#FEFAE0"
+            app:boxStrokeColor="@color/black"
+            android:layout_marginTop="-20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:translationZ="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textTitleTanggalLahir"
+            app:layout_constraintVertical_bias="0.0">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#949494"
+                android:ems="10"
+                android:inputType="date"
+                android:fontFamily="@font/gabarito_medium"
+                android:text="16/01/2019" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/textTitlePassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:text="password"
+            android:fontFamily="@font/gabarito_bold"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:translationZ="12dp"
+            app:layout_constraintBottom_toBottomOf="@+id/vBottomSheet"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputTanggalLahir"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputPassword"
+            app:boxBackgroundColor="#FEFAE0"
+            app:boxStrokeColor="@color/black"
+            android:layout_marginTop="-20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:translationZ="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textTitlePassword"
+            app:layout_constraintVertical_bias="0.0">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#949494"
+                android:inputType="textPassword"
+                android:fontFamily="@font/gabarito_medium"
+                android:text="Sa****Ma***456" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <View
+            android:id="@+id/backgroundButtonSimpan"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/card_light_green"
+            android:elevation="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/buttonSimpan"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/buttonSimpan"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/buttonSimpan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:fontFamily="@font/gabarito_bold"
+            android:padding="8dp"
+            android:text="simpan perubahan"
+            android:textColor="#3A3128"
+            android:textSize="16sp"
+            android:translationZ="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/vBottomSheet"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputPassword"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <View
+            android:id="@+id/upperLine"
+            android:layout_width="90dp"
+            android:layout_height="5dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/card_grey"
+            android:elevation="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/buttonSimpan"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/vBottomSheet"
+            app:layout_constraintVertical_bias="0.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

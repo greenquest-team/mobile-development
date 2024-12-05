@@ -6,55 +6,73 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="8dp">
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/ivAvatarLeaderboard"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:translationZ="12dp"
-        app:layout_constraintBottom_toBottomOf="@+id/cardLeaderboard"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/cardLeaderboard"
-        app:layout_constraintTop_toTopOf="@+id/cardLeaderboard"
-        tools:src="@tools:sample/avatars" />
+        app:layout_constraintTop_toTopOf="@+id/textUsernameLeaderboard"
+        app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+        app:srcCompat="@drawable/test_image" />
 
     <View
         android:id="@+id/cardLeaderboard"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginStart="66dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/card_light_green"
-        android:elevation="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/card_neutral"
+        app:layout_constraintBottom_toBottomOf="@+id/textPointsEarned"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/numberRank"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textUsernameLeaderboard" />
+
+    <TextView
+        android:id="@+id/textUsernameLeaderboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/gabarito_bold"
+        android:textColor="#234A2E"
+        android:textSize="16sp"
+        android:text="Username User"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/ivAvatarLeaderboard"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <View
-        android:id="@+id/numberRank"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:background="@drawable/rank_number_background"
-        android:elevation="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/cardLeaderboard" />
-
     <TextView
-        android:id="@+id/tvRank"
+        android:id="@+id/textPointsEarned"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1"
-        android:textSize="20sp"
+        android:paddingBottom="8dp"
+        android:layout_marginTop="4dp"
+        android:scrollbarSize="16sp"
         android:fontFamily="@font/gabarito_bold"
-        android:textColor="@color/black"
-        android:translationZ="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/numberRank"
-        app:layout_constraintEnd_toEndOf="@+id/numberRank"
-        app:layout_constraintStart_toStartOf="@+id/numberRank"
-        app:layout_constraintTop_toTopOf="@+id/numberRank" />
+        android:text="100"
+        android:textColor="#90A287"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textUsernameLeaderboard"
+        app:layout_constraintTop_toBottomOf="@+id/textUsernameLeaderboard"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textPointsDifference"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/gabarito_bold"
+        android:text="+3 points"
+        android:textColor="#234A2E"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/cardLeaderboard"
+        app:layout_constraintTop_toTopOf="@+id/textUsernameLeaderboard" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

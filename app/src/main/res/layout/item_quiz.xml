@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textPertanyaanQuiz"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/gabarito_regular"
+        android:text="Aku merupakan sampah yang berasal dari tumbuhan. Sampah apakah aku?"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <View
+        android:id="@+id/backgroundGambarQuiz"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/card_dark_green"
+        app:layout_constraintBottom_toBottomOf="@+id/imageGambarQuiz"
+        app:layout_constraintEnd_toEndOf="@+id/imageGambarQuiz"
+        app:layout_constraintStart_toStartOf="@+id/imageGambarQuiz"
+        app:layout_constraintTop_toTopOf="@+id/imageGambarQuiz"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/imageGambarQuiz"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="16dp"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textPertanyaanQuiz"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/test_image_contoh_soal" />
+
+    <Button
+        android:id="@+id/buttonAnswerA"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#7FB002"
+        android:fontFamily="@font/gabarito_bold"
+        android:textAllCaps="false"
+        android:text="sampah organik"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundGambarQuiz"
+        app:layout_constraintStart_toStartOf="@+id/backgroundGambarQuiz"
+        app:layout_constraintTop_toBottomOf="@+id/backgroundGambarQuiz" />
+
+    <Button
+        android:id="@+id/buttonAnswerB"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#A31F00"
+        android:fontFamily="@font/gabarito_bold"
+        android:textAllCaps="false"
+        android:text="sampah anorganik"
+        app:layout_constraintEnd_toEndOf="@+id/buttonAnswerA"
+        app:layout_constraintStart_toStartOf="@+id/buttonAnswerA"
+        app:layout_constraintTop_toBottomOf="@+id/buttonAnswerA" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

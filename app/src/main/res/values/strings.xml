@@ -26,4 +26,6 @@
     <string name="profile">Profile</string>
     <string name="ray">Ray</string>
     <string name="leaderboard">Leaderboard</string>
+    <string name="quiz_time">Quiz Time</string>
+    <string name="desc_logo_greenquest">Logo Greenquest</string>
 </resources>
