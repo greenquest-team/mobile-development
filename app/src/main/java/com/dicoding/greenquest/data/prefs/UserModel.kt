@@ -1,7 +1,7 @@
 package com.dicoding.greenquest.data.prefs
 
 data class UserModel(
-    val user_id: Int,
+    val user_id: String,
     val name: String,
     val email: String,
     val password: String,

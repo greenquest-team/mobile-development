@@ -15,7 +15,9 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.dicoding.greenquest.R
 import com.dicoding.greenquest.ViewModelFactory
+import com.dicoding.greenquest.data.remote.retrofit.ApiConfig
 import com.dicoding.greenquest.databinding.ActivityMainBinding
+import com.dicoding.greenquest.di.Injection
 import com.dicoding.greenquest.ui.login.LoginActivity
 import com.dicoding.greenquest.ui.main.MainViewModel
 
@@ -25,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
     }
 
-    private val viewModel by viewModels<MainViewModel> {
+    private val mainViewModel by viewModels<MainViewModel> {
         ViewModelFactory.getInstance(this)
     }
 
@@ -52,28 +54,34 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
 
-        viewModel.getSession().observe(this) { user ->
-            if (!user.isLogin) {
-                // Jika belum login, langsung arahkan ke LoginActivity
+        mainViewModel.getSession().observe(this) { user ->
+            if (!user.isLogin || user.token.isEmpty()) {
                 startActivity(Intent(this, LoginActivity::class.java))
                 finish()
             } else {
-                // Jika sudah login, baru tampilkan layout
-                setupView()
+                ApiConfig.setToken(user.token)
+                Injection.updateRepositoryToken(user.token)
             }
+
+            setupView()
+
+
         }
+
+
+    }
+
+    private fun setupView() {
+        setContentView(binding.root)
 
         val navView: BottomNavigationView = binding.navView
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
 
         navView.setupWithNavController(navController)
-    }
 
-    private fun setupView() {
         if (!allPermissionsGranted()) {
             requestPermissionLauncher.launch(REQUIRED_PERMISSION)
         }

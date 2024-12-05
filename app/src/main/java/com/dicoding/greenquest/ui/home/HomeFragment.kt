@@ -15,6 +15,7 @@ import androidx.fragment.app.viewModels
 import com.dicoding.greenquest.ui.scan.ScanActivity
 import com.dicoding.greenquest.R
 import com.dicoding.greenquest.ViewModelFactory
+import com.dicoding.greenquest.data.prefs.UserModel
 import com.dicoding.greenquest.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -46,6 +47,10 @@ class HomeFragment : Fragment() {
 //            startActivity(intent)
 //        }
 
+        homeViewModel.getSession().observe(viewLifecycleOwner) { user ->
+            binding.textUsername.text = user.name
+        }
+
         binding.circularProgressBar.progressMax = 100f
 
         val progressBarAnimator = ObjectAnimator.ofFloat(binding.circularProgressBar, "progress", 0f, 50f).apply {
@@ -66,6 +71,8 @@ class HomeFragment : Fragment() {
             playTogether(progressBarAnimator, textAnimator)
             start()// Play both animations simultaneously
         }
+
+//        val user:
 
 
         return root
