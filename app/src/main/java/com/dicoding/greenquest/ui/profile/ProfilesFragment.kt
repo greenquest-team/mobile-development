@@ -6,12 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import com.dicoding.greenquest.ViewModelFactory
 import com.dicoding.greenquest.databinding.FragmentProfilesBinding
+import com.dicoding.greenquest.ui.home.HomeViewModel
 
 class ProfilesFragment : Fragment() {
 
     private var _binding: FragmentProfilesBinding? = null
+
+    private val profilesViewModel: ProfilesViewModel by viewModels {
+        ViewModelFactory.getInstance(requireContext())
+    }
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,8 +29,6 @@ class ProfilesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(ProfilesViewModel::class.java)
 
         _binding = FragmentProfilesBinding.inflate(inflater, container, false)
         return binding.root
@@ -39,8 +44,8 @@ class ProfilesFragment : Fragment() {
         binding.pointsCount.text = "1200 Points" // Replace with actual points data
 
         // Example: Set click listener for the button
-        binding.button.setOnClickListener {
-            // Handle button click, e.g., navigate to leaderboard
+        binding.logoutBtn.setOnClickListener {
+            profilesViewModel.logout()
         }
     }
 
