@@ -15,7 +15,7 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-        buildConfigField("String", "BASE_URL", "\"http://34.50.98.186/api/\"")
+        buildConfigField("String", "BASE_URL", "\"https://green-quest.live/api/\"")
         buildConfigField("String", "DUMMY_URL", "\"https://story-api.dicoding.dev/v1/\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

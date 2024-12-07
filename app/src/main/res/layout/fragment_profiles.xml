@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="60dp"
     android:fillViewport="true"
     tools:context=".ui.home.HomeFragment">
 
@@ -15,8 +15,8 @@
 
         <View
             android:id="@+id/half_circle"
-            android:layout_width="590dp"
-            android:layout_height="330dp"
+            android:layout_width="530dp"
+            android:layout_height="270dp"
             android:layout_gravity="center"
             android:background="@drawable/half_circle_dark_red"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -27,20 +27,20 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <com.google.android.material.imageview.ShapeableImageView
-            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
             android:id="@+id/ivAvatar"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginTop="64dp"
             android:elevation="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/half_circle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.50"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/half_circle"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
             app:srcCompat="@drawable/test_image" />
 
-        <!-- TextView untuk salam -->
         <TextView
             android:id="@+id/textUsername"
             android:layout_width="wrap_content"
@@ -50,7 +50,7 @@
             android:fontFamily="@font/gabarito_bold"
             android:text="@string/username"
             android:textColor="#000000"
-            android:textSize="48sp"
+            android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -62,53 +62,35 @@
         <View
             android:id="@+id/points_background"
             android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="16dp"
+            android:layout_height="0dp"
             android:background="@drawable/card_points"
             android:elevation="4dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/points_count"
             app:layout_constraintEnd_toEndOf="@+id/points_count"
-            app:layout_constraintHorizontal_bias="0.50"
             app:layout_constraintStart_toStartOf="@+id/points_count"
-            app:layout_constraintTop_toBottomOf="@+id/textUsername"
-            app:layout_constraintVertical_bias="0" />
+            app:layout_constraintTop_toTopOf="@+id/points_count" />
 
         <TextView
             android:id="@+id/points_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:elevation="4dp"
             android:fontFamily="@font/gabarito_bold"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
+            android:padding="8dp"
             android:text="@string/points_count"
             android:textColor="#143B21"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/points_background"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/half_circle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/points_background"
-            app:layout_constraintVertical_bias="0.50" />
-
-        <View
-            android:id="@+id/card_inside"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="32dp"
-            android:background="@drawable/card_dark_brown_no_bottom_corner"
-            android:elevation="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/congrats_peringkat"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/congrats_peringkat"
+            app:layout_constraintTop_toBottomOf="@+id/textUsername"
             app:layout_constraintVertical_bias="0.0" />
 
         <View
             android:id="@+id/informasi_pribadi"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="120dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="16dp"
@@ -119,6 +101,35 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/half_circle"
             app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/btnLihatProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/gabarito_bold"
+            android:text="lihat"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:translationZ="12dp"
+            app:layout_constraintBottom_toBottomOf="@+id/informasi_pribadi"
+            app:layout_constraintEnd_toStartOf="@+id/arrowRight"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/informasi_pribadi" />
+
+        <View
+            android:id="@+id/arrowRight"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/icon_arrow_right"
+            android:elevation="12dp"
+            app:layout_constraintBottom_toBottomOf="@+id/btnLihatProfile"
+            app:layout_constraintEnd_toEndOf="@+id/informasi_pribadi"
+            app:layout_constraintTop_toTopOf="@+id/btnLihatProfile"
+            app:layout_constraintVertical_bias="0.50" />
 
         <TextView
             android:id="@+id/tv_title_info_pribadi"
@@ -139,55 +150,81 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <View
-            android:id="@+id/congrats_peringkat"
+            android:id="@+id/cardBackground"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="0dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginTop="-16dp"
+            android:layout_marginBottom="-16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             android:background="@drawable/card_brown"
             android:elevation="4dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/backgroundButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/informasi_pribadi"
+            app:layout_constraintTop_toTopOf="@+id/card_inside"
             app:layout_constraintVertical_bias="0.0" />
+
+        <View
+            android:id="@+id/card_inside"
+            android:padding="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/card_dark_brown_no_bottom_corner"
+            android:elevation="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/informasi_pribadi" />
+
+        <View
+            android:id="@+id/backgroundButton"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:paddingBottom="16dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/card_light_green"
+            android:elevation="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/buttonLeaderboard"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/buttonLeaderboard"
+            app:layout_constraintVertical_bias="0.50" />
 
         <TextView
             android:id="@+id/tv_title_congrats_peringkat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
             android:elevation="4dp"
             android:fontFamily="@font/gabarito_medium"
             android:text="@string/selamat_kamu_naik_peringkat"
             android:textColor="#FEFAE0"
-            android:textSize="32sp"
-            app:layout_constraintBottom_toBottomOf="@+id/congrats_peringkat"
-            app:layout_constraintEnd_toEndOf="@+id/congrats_peringkat"
-            app:layout_constraintStart_toStartOf="@+id/congrats_peringkat"
-            app:layout_constraintTop_toTopOf="@+id/congrats_peringkat"
-            app:layout_constraintVertical_bias="0.65" />
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="16dp"
-            android:backgroundTint="#ABC803"
-            android:elevation="4dp"
-            android:fontFamily="@font/gabarito_bold"
-            android:text="@string/cek_leaderboard"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
             android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_inside" />
+
+        <TextView
+            android:id="@+id/buttonLeaderboard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/gabarito_bold"
+            android:padding="8dp"
+            android:text="cek leaderboard"
+            android:textColor="#3A3128"
+            android:textSize="16sp"
             android:translationZ="4dp"
-            app:layout_constraintBottom_toBottomOf="@+id/congrats_peringkat"
-            app:layout_constraintEnd_toEndOf="@+id/congrats_peringkat"
-            app:layout_constraintStart_toStartOf="@+id/congrats_peringkat"
+            app:layout_constraintEnd_toEndOf="@+id/backgroundButton"
+            app:layout_constraintStart_toStartOf="@+id/backgroundButton"
             app:layout_constraintTop_toBottomOf="@+id/tv_title_congrats_peringkat" />
 
         <TextView
@@ -207,6 +244,69 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/textName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/gabarito_regular"
+            android:text="@string/ray"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:translationZ="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/informasi_pribadi"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/informasi_pribadi"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title_info_pribadi" />
+
+        <TextView
+            android:id="@+id/textCardUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/gabarito_regular"
+            android:text="ray123"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:translationZ="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/informasi_pribadi"
+            app:layout_constraintEnd_toEndOf="@+id/informasi_pribadi"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/informasi_pribadi"
+            app:layout_constraintTop_toBottomOf="@+id/textName"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textTitleHistory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/gabarito_bold"
+            android:text="@string/history"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardBackground" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textTitleHistory"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
             android:id="@+id/logout_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -222,93 +322,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/title_text_history"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            android:elevation="8dp"
-            android:fontFamily="@font/gabarito_bold"
-            android:text="@string/history"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/recyclerView2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/congrats_peringkat"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:translationZ="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title_text_history" />
-
-        <TextView
-            android:id="@+id/tv_user"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:fontFamily="@font/gabarito_regular"
-            android:text="@string/ray"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:translationZ="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/informasi_pribadi"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/informasi_pribadi"
-            app:layout_constraintTop_toBottomOf="@+id/tv_title_info_pribadi" />
-
-        <TextView
-            android:id="@+id/tv_username"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="16dp"
-            android:fontFamily="@font/gabarito_regular"
-            android:text="at ray123"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:translationZ="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/informasi_pribadi"
-            app:layout_constraintEnd_toEndOf="@+id/informasi_pribadi"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/informasi_pribadi"
-            app:layout_constraintTop_toBottomOf="@+id/tv_title_info_pribadi"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <Button
-            android:id="@+id/btnLihat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:backgroundTint="#ABC803"
-            android:drawableEnd="@drawable/arrow_right"
-            android:fontFamily="@font/gabarito_bold"
-            android:text="@string/lihat"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:translationZ="12dp"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="@+id/informasi_pribadi"
-            app:layout_constraintEnd_toEndOf="@+id/informasi_pribadi"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/informasi_pribadi"
-            app:layout_constraintTop_toTopOf="@+id/informasi_pribadi"
-            app:layout_constraintVertical_bias="0.509" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

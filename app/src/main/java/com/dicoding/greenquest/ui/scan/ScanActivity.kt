@@ -15,7 +15,7 @@ import androidx.camera.core.resolutionselector.AspectRatioStrategy
 import androidx.camera.core.resolutionselector.ResolutionSelector
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import com.dicoding.greenquest.OverlayView
+import com.dicoding.greenquest.ui.customView.OverlayView
 import com.dicoding.greenquest.ViewModelFactory
 import com.dicoding.greenquest.databinding.ActivityScanBinding
 import com.dicoding.greenquest.helper.ObjectDetectorHelper
@@ -227,6 +227,7 @@ class ScanActivity : AppCompatActivity() {
                     binding.pinkCard.visibility = View.VISIBLE
                     binding.tvGreenCard.visibility = View.VISIBLE
                     binding.tvPinkCard.visibility = View.VISIBLE
+                    binding.fabChecklist.visibility = View.VISIBLE
 
                     binding.tvGreenCard.text = randomItem.description
                     binding.tvPinkCard.text = randomItem.craft
@@ -249,6 +250,7 @@ class ScanActivity : AppCompatActivity() {
         binding.pinkCard.visibility = View.GONE
         binding.tvGreenCard.visibility = View.GONE
         binding.tvPinkCard.visibility = View.GONE
+        binding.fabChecklist.visibility = View.GONE
     }
 
     private fun showLoading(isLoading: Boolean) {

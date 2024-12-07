@@ -21,6 +21,15 @@
         android:theme="@style/Theme.GreenQuest"
         tools:targetApi="31">
         <activity
+            android:name=".ui.CustomizeProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.materi.MateriActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.mission.MissionActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.register.RegisterActivity"
             android:exported="false" />
         <activity

@@ -1,4 +1,4 @@
-package com.dicoding.greenquest
+package com.dicoding.greenquest.ui.customView
 
 import android.content.Context
 import android.graphics.Canvas
@@ -10,7 +10,6 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
-import androidx.core.content.ContextCompat
 import org.tensorflow.lite.task.vision.detector.Detection
 import java.text.NumberFormat
 import java.util.LinkedList

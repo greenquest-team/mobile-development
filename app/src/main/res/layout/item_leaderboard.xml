@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="8dp">
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/ivAvatarLeaderboard"
         android:layout_width="40dp"
         android:layout_height="40dp"
@@ -15,6 +15,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/cardLeaderboard"
         app:layout_constraintStart_toStartOf="@+id/cardLeaderboard"
         app:layout_constraintTop_toTopOf="@+id/cardLeaderboard"
+        app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
         tools:src="@tools:sample/avatars" />
 
     <View
@@ -23,7 +24,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="66dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/card_light_green"
+        android:background="@drawable/card_light_creeam"
         android:elevation="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

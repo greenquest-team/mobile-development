@@ -27,7 +27,7 @@
 
         </androidx.camera.view.PreviewView>
 
-        <com.dicoding.greenquest.OverlayView
+        <com.dicoding.greenquest.ui.customView.OverlayView
             android:id="@+id/overlay"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -152,6 +152,21 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageViewFlash" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_checklist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/yellow"
+            android:visibility="gone"
+            android:contentDescription="FAB"
+            android:src="@drawable/ic_checklist"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:fabSize="normal"
+            app:tint="@android:color/white" />
 
 
         <View

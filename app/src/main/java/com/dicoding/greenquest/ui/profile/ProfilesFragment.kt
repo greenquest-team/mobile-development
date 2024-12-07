@@ -1,5 +1,6 @@
 package com.dicoding.greenquest.ui.profile
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +9,12 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
+import com.dicoding.greenquest.R
 import com.dicoding.greenquest.ViewModelFactory
 import com.dicoding.greenquest.databinding.FragmentProfilesBinding
+import com.dicoding.greenquest.ui.CustomizeProfileActivity
 import com.dicoding.greenquest.ui.home.HomeViewModel
 
 class ProfilesFragment : Fragment() {
@@ -38,10 +43,26 @@ class ProfilesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Example: Set username text dynamically
-        binding.tvUsername.text = "Ray" // Replace with actual user data
+        binding.textCardUsername.text = "@ray132" // Replace with actual user data
 
         // Example: Set points count dynamically
         binding.pointsCount.text = "1200 Points" // Replace with actual points data
+
+        binding.buttonLeaderboard.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_navigation_profiles_to_navigation_leaderboard,
+                null,
+                navOptions {
+                    popUpTo(R.id.navigation_profiles) {
+                        inclusive = true // Menghapus ProfilesFragment dari stack
+                    }
+                }
+            )
+        }
+        binding.btnLihatProfile.setOnClickListener {
+            val intent = Intent(requireContext(), CustomizeProfileActivity::class.java)
+            startActivity(intent)
+        }
 
         // Example: Set click listener for the button
         binding.logoutBtn.setOnClickListener {
