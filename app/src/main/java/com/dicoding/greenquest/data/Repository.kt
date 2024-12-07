@@ -46,7 +46,7 @@ class Repository private constructor(
         emit(Result.Loading)
 
         try {
-            val response = apiService.getStories()
+            val response = apiServiceDummy.getStories()
             val stories = response.listStory
             val storyList = stories.map { story ->
                 QuestEntity(

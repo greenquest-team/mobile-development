@@ -5,18 +5,23 @@ import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.greenquest.ui.scan.ScanActivity
 import com.dicoding.greenquest.R
 import com.dicoding.greenquest.ViewModelFactory
 import com.dicoding.greenquest.data.prefs.UserModel
 import com.dicoding.greenquest.databinding.FragmentHomeBinding
+import com.dicoding.greenquest.data.Result
+import com.dicoding.greenquest.data.local.entity.QuestEntity
 
 class HomeFragment : Fragment() {
 
@@ -48,7 +53,7 @@ class HomeFragment : Fragment() {
 //        }
 
         homeViewModel.getSession().observe(viewLifecycleOwner) { user ->
-            binding.textUsername.text = user.name
+            binding.textUsername.text = "Hey ${user.name}"
         }
 
         binding.circularProgressBar.progressMax = 100f
@@ -72,6 +77,12 @@ class HomeFragment : Fragment() {
             start()// Play both animations simultaneously
         }
 
+        val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.rvQuest.layoutManager = layoutManager
+
+
+        observeViewModel()
+
 //        val user:
 
 
@@ -88,5 +99,56 @@ class HomeFragment : Fragment() {
         _binding = null
         animatorSet?.cancel() // Batalkan animasi untuk mencegah error
         animatorSet = null // Bersihkan referensi untuk menghindari memory leak
+    }
+
+    private fun observeViewModel() {
+        homeViewModel.getAllStory().observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Loading -> {
+                    showLoading(true)
+                    Log.d("HomeFragment", "Loading...")
+                }
+                is Result.Success -> {
+                    showLoading(false)
+                    Log.d("HomeFragment", "Success: ${result.data}")
+
+                    val data = result.data
+                    val adapter = QuestAdapter()
+                    adapter.submitList(data)
+                    binding.rvQuest.adapter = adapter
+
+                    adapter.setOnItemClickCallback(object : QuestAdapter.OnItemClickCallback {
+                        override fun onItemClicked(data: QuestEntity) {
+                            val detailActivityIntent = Intent(requireContext(), ScanActivity::class.java)
+                            startActivity(detailActivityIntent)
+                        }
+                    })
+                }
+                is Result.Error -> {
+                    showLoading(false)
+                    Log.e("HomeFragment", "Error: ${result.error}")
+                    if (result.error.contains("401")) {
+                        showToast("Unauthorized, please re-login.")
+                        homeViewModel.logout()
+                    } else {
+                        showToast(result.error)
+                    }
+                }
+                else -> {
+                    showLoading(false)
+                    Log.e("HomeFragment", "Unknown")
+                    showToast("Unknown")
+                }
+            }
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.viewLoading.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 }

@@ -2,6 +2,7 @@ package com.dicoding.greenquest.ui.scan
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Surface
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -20,6 +21,7 @@ import com.dicoding.greenquest.helper.ObjectDetectorHelper
 import org.tensorflow.lite.task.vision.detector.Detection
 import java.util.concurrent.Executors
 import com.dicoding.greenquest.data.Result
+import com.google.common.util.concurrent.ListenableFuture
 
 class ScanActivity : AppCompatActivity() {
 
@@ -31,6 +33,7 @@ class ScanActivity : AppCompatActivity() {
         ViewModelFactory.getInstance(this)
     }
 
+    private lateinit var cameraProviderFuture: ListenableFuture<ProcessCameraProvider>
     private lateinit var binding: ActivityScanBinding
     private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
@@ -125,15 +128,16 @@ class ScanActivity : AppCompatActivity() {
         })
 
 
-        val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
+        cameraProviderFuture = ProcessCameraProvider.getInstance(this)
 
         cameraProviderFuture.addListener({
+            val rotation = binding.viewFinder.display?.rotation ?: Surface.ROTATION_0
             val resolutionSelector = ResolutionSelector.Builder()
                 .setAspectRatioStrategy(AspectRatioStrategy.RATIO_16_9_FALLBACK_AUTO_STRATEGY)
                 .build()
             val imageAnalyzer = ImageAnalysis.Builder()
                 .setResolutionSelector(resolutionSelector)
-                .setTargetRotation(binding.viewFinder.display.rotation)
+                .setTargetRotation(rotation)
                 .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                 .setOutputImageFormat(ImageAnalysis.OUTPUT_IMAGE_FORMAT_RGBA_8888)
                 .build()
@@ -166,7 +170,8 @@ class ScanActivity : AppCompatActivity() {
 
     private fun stopCamera() {
         isCameraRunning = false
-        ProcessCameraProvider.getInstance(this).get().unbindAll()
+        ProcessCameraProvider.getInstance(this)
+        cameraProviderFuture.get().unbindAll()
         binding.overlay.setOnBoxClickListener(null)
     }
 
@@ -199,6 +204,7 @@ class ScanActivity : AppCompatActivity() {
 
                 is Result.Error -> {
                     showLoading(false)
+                    showToast("Error")
                     Log.e("RandomWaste", "Error: ${result.error}")
                 }
             }
