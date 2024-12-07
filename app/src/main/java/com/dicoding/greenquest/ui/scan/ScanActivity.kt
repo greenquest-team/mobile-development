@@ -1,5 +1,6 @@
 package com.dicoding.greenquest.ui.scan
 
+import android.hardware.camera2.CameraManager
 import android.os.Bundle
 import android.util.Log
 import android.view.Surface
@@ -42,10 +43,22 @@ class ScanActivity : AppCompatActivity() {
     private lateinit var label: String
     private var isCameraRunning: Boolean = true
 
+    private var isFlashlightOn: Boolean = false
+    private lateinit var cameraManager: CameraManager
+    private lateinit var cameraId: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityScanBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        cameraManager = getSystemService(CAMERA_SERVICE) as CameraManager
+        cameraId = cameraManager.cameraIdList.find { id ->
+            cameraManager.getCameraCharacteristics(id)
+                .get(android.hardware.camera2.CameraCharacteristics.FLASH_INFO_AVAILABLE) == true
+        } ?: throw IllegalStateException("Flashlight not available on this device")
+
+        binding.imageViewFlash.setOnClickListener { toggleFlashlight() }
 
         binding.btnResetScan.setOnClickListener {
             startCamera()
@@ -173,6 +186,25 @@ class ScanActivity : AppCompatActivity() {
         ProcessCameraProvider.getInstance(this)
         cameraProviderFuture.get().unbindAll()
         binding.overlay.setOnBoxClickListener(null)
+
+        try {
+            cameraManager.setTorchMode(cameraId, false)
+            isFlashlightOn = false
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun toggleFlashlight() {
+        try {
+            isFlashlightOn = !isFlashlightOn
+            cameraManager.setTorchMode(cameraId, isFlashlightOn)
+            val message = if (isFlashlightOn) "Flashlight ON" else "Flashlight OFF"
+            showToast(message)
+        } catch (e: Exception) {
+            showToast("Failed to toggle flashlight")
+            e.printStackTrace()
+        }
     }
 
     private fun viewCardTextShow() {
