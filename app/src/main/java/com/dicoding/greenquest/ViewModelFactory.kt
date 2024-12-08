@@ -9,6 +9,7 @@ import com.dicoding.greenquest.ui.home.HomeViewModel
 import com.dicoding.greenquest.ui.login.LoginViewModel
 import com.dicoding.greenquest.ui.main.MainViewModel
 import com.dicoding.greenquest.ui.profile.ProfilesViewModel
+import com.dicoding.greenquest.ui.register.SignupViewModel
 import com.dicoding.greenquest.ui.scan.ScanViewModel
 
 class ViewModelFactory(private val repository: Repository) : ViewModelProvider.NewInstanceFactory() {
@@ -30,6 +31,9 @@ class ViewModelFactory(private val repository: Repository) : ViewModelProvider.N
             }
             modelClass.isAssignableFrom(ProfilesViewModel::class.java) -> {
                 ProfilesViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(SignupViewModel::class.java) -> {
+                SignupViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

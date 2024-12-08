@@ -10,6 +10,7 @@ import com.dicoding.greenquest.data.prefs.UserModel
 import com.dicoding.greenquest.data.prefs.UserPreference
 import com.dicoding.greenquest.data.remote.response.LoginResponse
 import com.dicoding.greenquest.data.remote.response.PayloadItem
+import com.dicoding.greenquest.data.remote.response.RegisterResponse
 import com.dicoding.greenquest.data.remote.retrofit.ApiService
 import kotlinx.coroutines.flow.Flow
 
@@ -38,8 +39,12 @@ class Repository private constructor(
         userPreference.logout()
     }
 
-    suspend fun login(email: String, password: String): LoginResponse {
-        return apiServiceDummy.login(email, password)
+    suspend fun login(username: String, password: String): LoginResponse {
+        return apiService.login(username, password)
+    }
+
+    suspend fun register(name: String, username: String, email: String, tglLahir: String, password: String): RegisterResponse {
+        return apiService.register(name, username, email, tglLahir, password)
     }
 
     fun getAllStory(): LiveData<Result<List<QuestEntity>>> = liveData {

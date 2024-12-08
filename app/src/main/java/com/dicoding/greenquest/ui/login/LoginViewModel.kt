@@ -16,16 +16,17 @@ import com.dicoding.greenquest.di.Injection
 
 class LoginViewModel(private val repository: Repository) : ViewModel() {
 
-    fun login(email: String, password: String) = liveData {
+    fun login(username: String, password: String) = liveData {
     emit(Result.Loading)
     try {
-        val dataUser = repository.login(email, password)
+        val dataUser = repository.login(username, password)
         Log.d("LoginViewModel", "Success: ${dataUser.message}")
-        dataUser.loginResult?.let { user ->
+        dataUser.payload?.let { user ->
             saveSession(UserModel(
-                user_id = user.userId.toString(),
-                name = user.name.toString(),
-                email = email,
+                user_id = user.user.id,
+                name = user.user.name.toString(),
+                username = username,
+                email = user.user.email.toString(),
                 password = password,
                 token = user.token.toString()
             ))

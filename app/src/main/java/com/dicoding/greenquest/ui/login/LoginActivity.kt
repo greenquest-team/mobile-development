@@ -30,10 +30,10 @@ class LoginActivity : AppCompatActivity() {
         val randomInt = Random.nextInt(1, 100)
 
         binding.loginButton.setOnClickListener {
-            val email = binding.usernameEditText.text.toString()
+            val username = binding.usernameEditText.text.toString()
             val password = binding.passwordEditText.text.toString()
 
-            observeViewModel(email, password)
+            observeViewModel(username, password)
         }
 
         binding.tvRegister.setOnClickListener {
@@ -41,8 +41,8 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun observeViewModel(email: String, password: String) {
-        loginViewModel.login(email, password).observe(this) { result ->
+    private fun observeViewModel(username: String, password: String) {
+        loginViewModel.login(username, password).observe(this) { result ->
             when (result) {
                 is Result.Loading -> {
                     showLoading(true)

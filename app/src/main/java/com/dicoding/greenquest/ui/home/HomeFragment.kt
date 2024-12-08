@@ -80,6 +80,10 @@ class HomeFragment : Fragment() {
         val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.rvQuest.layoutManager = layoutManager
 
+        binding.btnLihat.setOnClickListener {
+            startActivity(Intent(requireContext(), ScanActivity::class.java))
+        }
+
 
         observeViewModel()
 
@@ -102,45 +106,45 @@ class HomeFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-        homeViewModel.getAllStory().observe(viewLifecycleOwner) { result ->
-            when (result) {
-                is Result.Loading -> {
-                    showLoading(true)
-                    Log.d("HomeFragment", "Loading...")
-                }
-                is Result.Success -> {
-                    showLoading(false)
-                    Log.d("HomeFragment", "Success: ${result.data}")
-
-                    val data = result.data
-                    val adapter = QuestAdapter()
-                    adapter.submitList(data)
-                    binding.rvQuest.adapter = adapter
-
-                    adapter.setOnItemClickCallback(object : QuestAdapter.OnItemClickCallback {
-                        override fun onItemClicked(data: QuestEntity) {
-                            val detailActivityIntent = Intent(requireContext(), ScanActivity::class.java)
-                            startActivity(detailActivityIntent)
-                        }
-                    })
-                }
-                is Result.Error -> {
-                    showLoading(false)
-                    Log.e("HomeFragment", "Error: ${result.error}")
-                    if (result.error.contains("401")) {
-                        showToast("Unauthorized, please re-login.")
-                        homeViewModel.logout()
-                    } else {
-                        showToast(result.error)
-                    }
-                }
-                else -> {
-                    showLoading(false)
-                    Log.e("HomeFragment", "Unknown")
-                    showToast("Unknown")
-                }
-            }
-        }
+//        homeViewModel.getAllStory().observe(viewLifecycleOwner) { result ->
+//            when (result) {
+//                is Result.Loading -> {
+//                    showLoading(true)
+//                    Log.d("HomeFragment", "Loading...")
+//                }
+//                is Result.Success -> {
+//                    showLoading(false)
+//                    Log.d("HomeFragment", "Success: ${result.data}")
+//
+//                    val data = result.data
+//                    val adapter = QuestAdapter()
+//                    adapter.submitList(data)
+//                    binding.rvQuest.adapter = adapter
+//
+//                    adapter.setOnItemClickCallback(object : QuestAdapter.OnItemClickCallback {
+//                        override fun onItemClicked(data: QuestEntity) {
+//                            val detailActivityIntent = Intent(requireContext(), ScanActivity::class.java)
+//                            startActivity(detailActivityIntent)
+//                        }
+//                    })
+//                }
+//                is Result.Error -> {
+//                    showLoading(false)
+//                    Log.e("HomeFragment", "Error: ${result.error}")
+//                    if (result.error.contains("401")) {
+//                        showToast("Unauthorized, please re-login.")
+//                        homeViewModel.logout()
+//                    } else {
+//                        showToast(result.error)
+//                    }
+//                }
+//                else -> {
+//                    showLoading(false)
+//                    Log.e("HomeFragment", "Unknown")
+//                    showToast("Unknown")
+//                }
+//            }
+//        }
     }
 
     private fun showLoading(isLoading: Boolean) {

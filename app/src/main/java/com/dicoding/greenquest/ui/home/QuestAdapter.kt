@@ -50,26 +50,26 @@ class QuestAdapter: ListAdapter<QuestEntity, RecyclerView.ViewHolder>(DIFF_CALLB
 
     class GreenViewHolder(val binding: ItemCardQuestGreenBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(quest: QuestEntity) {
-            binding.cardTitle.text = quest.username
-            binding.cardButton.setOnClickListener {
+            binding.cardTitleQuest.text = quest.username
+            binding.cardButtonQuest.setOnClickListener {
                 Intent()
             }
              Glide.with(binding.root.context)
                 .load(quest.image)
                 .apply(RequestOptions.placeholderOf(R.drawable.ic_placeholder))
                 .error(R.drawable.ic_error)
-                .into(binding.cardImage)
+                .into(binding.cardImageQuest)
         }
     }
 
     class RedViewHolder(val binding: ItemCardQuestRedBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(quest: QuestEntity) {
-            binding.cardTitle.text = quest.username
+            binding.cardTitleQuest.text = quest.username
             Glide.with(binding.root.context)
                 .load(quest.image)
                 .apply(RequestOptions.placeholderOf(R.drawable.ic_placeholder))
                 .error(R.drawable.ic_error)
-                .into(binding.cardImage)
+                .into(binding.cardImageQuest)
         }
     }
 

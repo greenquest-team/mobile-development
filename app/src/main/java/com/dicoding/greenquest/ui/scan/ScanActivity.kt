@@ -1,5 +1,6 @@
 package com.dicoding.greenquest.ui.scan
 
+import android.content.Intent
 import android.hardware.camera2.CameraManager
 import android.os.Bundle
 import android.util.Log
@@ -22,6 +23,7 @@ import com.dicoding.greenquest.helper.ObjectDetectorHelper
 import org.tensorflow.lite.task.vision.detector.Detection
 import java.util.concurrent.Executors
 import com.dicoding.greenquest.data.Result
+import com.dicoding.greenquest.ui.home.HomeFragment
 import com.google.common.util.concurrent.ListenableFuture
 
 class ScanActivity : AppCompatActivity() {
@@ -52,13 +54,19 @@ class ScanActivity : AppCompatActivity() {
         binding = ActivityScanBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        cameraManager = getSystemService(CAMERA_SERVICE) as CameraManager
-        cameraId = cameraManager.cameraIdList.find { id ->
-            cameraManager.getCameraCharacteristics(id)
-                .get(android.hardware.camera2.CameraCharacteristics.FLASH_INFO_AVAILABLE) == true
-        } ?: throw IllegalStateException("Flashlight not available on this device")
+        if (!isFlashlightAvailable()) {
+            showToast("Flashlight tidak tersedia di perangkat ini.")
+            binding.imageViewFlash.isEnabled = false
+            binding.imageViewFlash.visibility = View.GONE
+        }
 
         binding.imageViewFlash.setOnClickListener { toggleFlashlight() }
+
+        binding.fabChecklist.setOnClickListener {
+            val intent = Intent(this@ScanActivity, HomeFragment::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
+        }
 
         binding.btnResetScan.setOnClickListener {
             startCamera()
@@ -192,6 +200,14 @@ class ScanActivity : AppCompatActivity() {
             isFlashlightOn = false
         } catch (e: Exception) {
             e.printStackTrace()
+        }
+    }
+
+    private fun isFlashlightAvailable(): Boolean {
+        val cameraManager = getSystemService(CAMERA_SERVICE) as CameraManager
+        return cameraManager.cameraIdList.any { id ->
+            cameraManager.getCameraCharacteristics(id)
+                .get(android.hardware.camera2.CameraCharacteristics.FLASH_INFO_AVAILABLE) == true
         }
     }
 

@@ -1,6 +1,7 @@
 package com.dicoding.greenquest.data.prefs
 
 import android.content.Context
+import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
@@ -10,7 +11,6 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import kotlin.random.Random
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "session")
 
@@ -20,10 +20,12 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
         dataStore.edit { preferences ->
             preferences[ID_KEY] = user.user_id
             preferences[USER] = user.name
+            preferences[USERNAME] = user.username
             preferences[EMAIL_KEY] = user.email
             preferences[PASSWORD] = user.password
             preferences[TOKEN_KEY] = user.token
             preferences[IS_LOGIN_KEY] = true
+            Log.d("UserPreference", "Session saved successfully")
         }
     }
 
@@ -32,8 +34,9 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
 
         return dataStore.data.map { preferences ->
             UserModel(
-                preferences[ID_KEY] ?: "",
+                preferences[ID_KEY] ?: 0,
                 preferences[USER] ?: "",
+                preferences[USERNAME] ?: "",
                 preferences[EMAIL_KEY] ?:"",
                 preferences[PASSWORD] ?: "",
                 preferences[TOKEN_KEY] ?: "",
@@ -52,9 +55,10 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
         @Volatile
         private var INSTANCE: UserPreference? = null
 
-        private val ID_KEY = stringPreferencesKey("user")
+        private val ID_KEY = intPreferencesKey("0")
         private val EMAIL_KEY = stringPreferencesKey("email")
         private val USER = stringPreferencesKey("user")
+        private val USERNAME = stringPreferencesKey("username")
         private val PASSWORD = stringPreferencesKey("password")
         private val TOKEN_KEY = stringPreferencesKey("token")
         private val IS_LOGIN_KEY = booleanPreferencesKey("isLogin")
