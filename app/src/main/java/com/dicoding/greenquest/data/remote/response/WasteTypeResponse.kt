@@ -8,13 +8,13 @@ data class WasteTypeResponse(
 	val code: Int,
 
 	@field:SerializedName("payload")
-	val payload: List<PayloadItem>,
+	val payload: List<WasteTypePayloadItem>,
 
 	@field:SerializedName("message")
 	val message: String
 )
 
-data class PayloadItem(
+data class WasteTypePayloadItem(
 
 	@field:SerializedName("type_name")
 	val typeName: String,

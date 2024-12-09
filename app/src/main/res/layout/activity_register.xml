@@ -117,7 +117,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/etUsername" />
 
-        <EditText
+        <com.dicoding.greenquest.ui.customView.MyCustomEmailEditText
             android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -175,7 +175,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/etTanggalLahir" />
 
-        <EditText
+        <com.dicoding.greenquest.ui.customView.MyCustomPasswordEditText
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -185,6 +185,7 @@
             android:background="@drawable/bg_edit_text_yellow"
             android:hint="buat password (ex: SayangMamah456)"
             android:inputType="textPassword"
+            app:endIconMode="password_toggle"
             android:padding="12dp"
             android:textColor="#143B21"
             android:textColorHint="#143B21"

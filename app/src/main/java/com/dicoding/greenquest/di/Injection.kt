@@ -22,7 +22,8 @@ object Injection {
             val apiServiceDummy = ApiConfig.getApiService(ApiType.DUMMY)
             val questDatabase = QuestDatabase.getInstance(context)
             val questDao = questDatabase.questDao()
-            repository =  Repository.getInstance(pref, apiServiceReal, apiServiceDummy, questDao)
+            val leaderboardDao = questDatabase.leaderboardDao()
+            repository =  Repository.getInstance(pref, apiServiceReal, apiServiceDummy, questDao, leaderboardDao)
 
             session.token.let { token ->
                 ApiConfig.setToken(token)

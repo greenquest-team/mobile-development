@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.dicoding.greenquest.data.Repository
 import com.dicoding.greenquest.di.Injection
 import com.dicoding.greenquest.ui.home.HomeViewModel
+import com.dicoding.greenquest.ui.leaderboard.LeaderboardViewModel
 import com.dicoding.greenquest.ui.login.LoginViewModel
 import com.dicoding.greenquest.ui.main.MainViewModel
 import com.dicoding.greenquest.ui.profile.ProfilesViewModel
@@ -34,6 +35,9 @@ class ViewModelFactory(private val repository: Repository) : ViewModelProvider.N
             }
             modelClass.isAssignableFrom(SignupViewModel::class.java) -> {
                 SignupViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(LeaderboardViewModel::class.java) -> {
+                LeaderboardViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

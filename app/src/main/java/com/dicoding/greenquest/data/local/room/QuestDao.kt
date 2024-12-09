@@ -5,6 +5,8 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
+import com.dicoding.greenquest.data.local.entity.LeaderboardEntity
 import com.dicoding.greenquest.data.local.entity.QuestEntity
 
 @Dao

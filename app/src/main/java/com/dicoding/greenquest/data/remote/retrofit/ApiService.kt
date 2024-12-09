@@ -1,5 +1,6 @@
 package com.dicoding.greenquest.data.remote.retrofit
 
+import com.dicoding.greenquest.data.remote.response.LeaderboardResponse
 import com.dicoding.greenquest.data.remote.response.LoginResponse
 import com.dicoding.greenquest.data.remote.response.RegisterResponse
 import com.dicoding.greenquest.data.remote.response.StoryResponse
@@ -35,4 +36,7 @@ interface ApiService {
 
     @GET("stories")
     suspend fun getStories(): StoryResponse
+
+    @GET("leaderboard")
+    suspend fun getLeaderboard(): LeaderboardResponse
 }
