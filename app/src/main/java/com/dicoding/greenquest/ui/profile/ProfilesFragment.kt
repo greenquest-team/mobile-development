@@ -42,8 +42,11 @@ class ProfilesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Example: Set username text dynamically
-        binding.textCardUsername.text = "@ray132" // Replace with actual user data
+        profilesViewModel.getSession().observe(viewLifecycleOwner) { user ->
+            binding.textUsername.text = "Hey ${user.name}"
+            binding.textName.text = "${user.name}"
+            binding.textCardUsername.text = "${user.username}"
+        }
 
         // Example: Set points count dynamically
         binding.pointsCount.text = "1200 Points" // Replace with actual points data

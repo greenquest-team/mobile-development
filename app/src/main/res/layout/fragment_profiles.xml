@@ -205,7 +205,7 @@
             android:layout_marginEnd="32dp"
             android:elevation="4dp"
             android:fontFamily="@font/gabarito_medium"
-            android:text="@string/selamat_kamu_naik_peringkat"
+            android:text="@string/peringkat"
             android:textColor="#FEFAE0"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"

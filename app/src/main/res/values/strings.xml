@@ -10,7 +10,7 @@
     <string name="username">Ray</string>
     <string name="points_count">1356 points</string>
     <string name="informasi_pribadi">Informasi Pribadi</string>
-    <string name="selamat_kamu_naik_peringkat">Selamat, kamu naik\nperingkat!</string>
+    <string name="peringkat">Yuk, cek peringkat teratas 10 saat ini</string>
     <string name="progressmu_sampai_mana">Progressmu sampai mana?</string>
 
     <string name="btn_scan">Scan</string>
