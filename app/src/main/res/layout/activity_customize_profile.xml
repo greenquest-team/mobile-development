@@ -126,7 +126,7 @@
                 android:inputType="text"
                 android:textColor="#949494"
                 android:fontFamily="@font/gabarito_medium"
-                android:text="Ray" />
+                android:hint="Ray" />
         </com.google.android.material.textfield.TextInputLayout>
         <TextView
             android:id="@+id/textTitleUsername"
@@ -167,7 +167,7 @@
                 android:inputType="text"
                 android:textColor="#949494"
                 android:fontFamily="@font/gabarito_medium"
-                android:text="ray123" />
+                android:hint="ray123" />
         </com.google.android.material.textfield.TextInputLayout>
         <TextView
             android:id="@+id/textTitleEmail"
@@ -208,7 +208,7 @@
                 android:textColor="#949494"
                 android:inputType="textEmailAddress"
                 android:fontFamily="@font/gabarito_medium"
-                android:text="ray@gmail.com" />
+                android:hint="ray@gmail.com" />
         </com.google.android.material.textfield.TextInputLayout>
         <TextView
             android:id="@+id/textTitleTanggalLahir"
@@ -250,7 +250,7 @@
                 android:ems="10"
                 android:inputType="date"
                 android:fontFamily="@font/gabarito_medium"
-                android:text="16/01/2019" />
+                android:hint="16/01/2019" />
         </com.google.android.material.textfield.TextInputLayout>
         <TextView
             android:id="@+id/textTitlePassword"
@@ -291,7 +291,7 @@
                 android:textColor="#949494"
                 android:inputType="textPassword"
                 android:fontFamily="@font/gabarito_medium"
-                android:text="Sa****Ma***456" />
+                android:hint="Sa****Ma***456" />
         </com.google.android.material.textfield.TextInputLayout>
         <View
             android:id="@+id/backgroundButtonSimpan"

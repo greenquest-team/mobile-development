@@ -19,7 +19,7 @@ import com.dicoding.greenquest.data.local.entity.QuestEntity
 import com.dicoding.greenquest.databinding.ItemCardQuestGreenBinding
 import com.dicoding.greenquest.databinding.ItemCardQuestRedBinding
 
-class QuestAdapter: ListAdapter<QuestEntity, RecyclerView.ViewHolder>(DIFF_CALLBACK){
+class QuestAdapter(private val onButtonClicked: (QuestEntity) -> Unit): ListAdapter<QuestEntity, RecyclerView.ViewHolder>(DIFF_CALLBACK){
 
     companion object {
         const val ITEM_GREEN = 0
@@ -38,22 +38,14 @@ class QuestAdapter: ListAdapter<QuestEntity, RecyclerView.ViewHolder>(DIFF_CALLB
             }
     }
 
-    private lateinit var onItemClickCallback: OnItemClickCallback
-
-    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
-        this.onItemClickCallback = onItemClickCallback
-    }
-
     override fun getItemViewType(position: Int): Int {
         return if (position % 2 == 0) ITEM_GREEN else ITEM_RED
     }
 
     class GreenViewHolder(val binding: ItemCardQuestGreenBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(quest: QuestEntity) {
-            binding.cardTitleQuest.text = quest.username
-            binding.cardButtonQuest.setOnClickListener {
-                Intent()
-            }
+        fun bind(quest: QuestEntity, onButtonClicked: (QuestEntity) -> Unit) {
+            binding.cardTitleQuest.text = quest.descriptionQuest
+            binding.cardButtonQuest.setOnClickListener { onButtonClicked(quest) }
              Glide.with(binding.root.context)
                 .load(quest.image)
                 .apply(RequestOptions.placeholderOf(R.drawable.ic_placeholder))
@@ -63,8 +55,9 @@ class QuestAdapter: ListAdapter<QuestEntity, RecyclerView.ViewHolder>(DIFF_CALLB
     }
 
     class RedViewHolder(val binding: ItemCardQuestRedBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(quest: QuestEntity) {
-            binding.cardTitleQuest.text = quest.username
+        fun bind(quest: QuestEntity, onButtonClicked: (QuestEntity) -> Unit) {
+            binding.cardTitleQuest.text = quest.descriptionQuest
+            binding.cardButtonQuest.setOnClickListener { onButtonClicked(quest) }
             Glide.with(binding.root.context)
                 .load(quest.image)
                 .apply(RequestOptions.placeholderOf(R.drawable.ic_placeholder))
@@ -90,16 +83,8 @@ class QuestAdapter: ListAdapter<QuestEntity, RecyclerView.ViewHolder>(DIFF_CALLB
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val quest = getItem(position)
         when (holder) {
-            is GreenViewHolder -> holder.bind(quest)
-            is RedViewHolder -> holder.bind(quest)
+            is GreenViewHolder -> holder.bind(quest, onButtonClicked)
+            is RedViewHolder -> holder.bind(quest, onButtonClicked)
         }
-
-        holder.itemView.setOnClickListener {
-            onItemClickCallback.onItemClicked(quest)
-        }
-    }
-
-    interface OnItemClickCallback {
-        fun onItemClicked(data: QuestEntity)
     }
 }

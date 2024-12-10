@@ -225,8 +225,6 @@ class ScanActivity : AppCompatActivity() {
 
     private fun viewCardTextShow() {
 
-        label = "plastic"
-
         showViewModel.randomWasteType(label).observe(this) { result ->
             when (result) {
                 is Result.Loading -> {

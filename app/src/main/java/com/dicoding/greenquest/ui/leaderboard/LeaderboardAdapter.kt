@@ -17,7 +17,7 @@ class LeaderboardAdapter : ListAdapter<LeaderboardEntity, LeaderboardAdapter.MyV
     class MyViewHolder (val binding: ItemLeaderboardBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(leaderboard: LeaderboardEntity) {
             binding.textUsernameLeaderboard.text = leaderboard.username.toString()
-            binding.textPointsEarned.text = leaderboard.points.toString()
+            binding.textPointsEarned.text = "${leaderboard.points.toString()} points"
             Glide.with(binding.root.context)
                 .load(R.drawable.test_image)
                 .apply(RequestOptions.placeholderOf(R.drawable.ic_placeholder))

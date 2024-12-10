@@ -55,7 +55,7 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
         @Volatile
         private var INSTANCE: UserPreference? = null
 
-        private val ID_KEY = intPreferencesKey("0")
+        private val ID_KEY = intPreferencesKey("id")
         private val EMAIL_KEY = stringPreferencesKey("email")
         private val USER = stringPreferencesKey("user")
         private val USERNAME = stringPreferencesKey("username")

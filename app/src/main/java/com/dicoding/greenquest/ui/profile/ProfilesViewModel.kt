@@ -20,4 +20,6 @@ class ProfilesViewModel(private val repository: Repository) : ViewModel() {
     fun getSession(): LiveData<UserModel> {
         return repository.getSession().asLiveData()
     }
+
+    fun getQuest() = repository.getQuest()
 }

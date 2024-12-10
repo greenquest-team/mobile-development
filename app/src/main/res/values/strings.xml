@@ -17,7 +17,7 @@
 
     <string name="tflitevision_is_not_initialized_yet">TfLiteVision is not initialized yet</string>
 
-    <string name="test">Test 123</string>
+    <string name="failed">Error on model TFLite</string>
 
     <string name="cek_leaderboard">cek leaderboard</string>
     <string name="lihat">lihat</string>
@@ -35,4 +35,5 @@
     <string name="register">Register</string>
     <string name="quiz_time">Quiz Time</string>
     <string name="desc_logo_greenquest">Logo Greenquest</string>
+    <string name="quest_complete">Anda sudah menyelesaikan semua quest hari ini</string>
 </resources>

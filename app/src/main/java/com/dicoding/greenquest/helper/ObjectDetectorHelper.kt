@@ -6,8 +6,10 @@ import android.os.SystemClock
 import android.util.Log
 import androidx.camera.core.ImageProxy
 import com.dicoding.greenquest.R
+import org.tensorflow.lite.support.common.ops.NormalizeOp
 import org.tensorflow.lite.support.image.ImageProcessor
 import org.tensorflow.lite.support.image.TensorImage
+import org.tensorflow.lite.support.image.ops.ResizeOp
 import org.tensorflow.lite.support.image.ops.Rot90Op
 import org.tensorflow.lite.task.core.BaseOptions
 import org.tensorflow.lite.task.vision.detector.Detection
@@ -57,7 +59,7 @@ class ObjectDetectorHelper (
             Log.d(TAG, "Setting up Object Detector with model: $modelName")
 
         } catch (e: IllegalStateException) {
-            detectorListener?.onError(context.getString(R.string.test))
+            detectorListener?.onError(context.getString(R.string.failed))
             Log.e(TAG, e.message.toString())
         }
 
@@ -70,14 +72,33 @@ class ObjectDetectorHelper (
         }
 
         val imageProcessor = ImageProcessor.Builder()
-            .add(Rot90Op(-image.imageInfo.rotationDegrees / 90))
+            .add(Rot90Op(-image.imageInfo.rotationDegrees / 90)) // Rotasi
+            .add(ResizeOp(224, 224, ResizeOp.ResizeMethod.BILINEAR)) // Resize ke [224, 224]
+            .add(NormalizeOp(0.0f, 1.0f)) // Normalisasi ke [-1, 1]
             .build()
 
         val tensorImage = imageProcessor.process(TensorImage.fromBitmap(toBitmap(image)))
 
+        // Perform inference
         var inferenceTime = SystemClock.uptimeMillis()
         val results = objectDetector?.detect(tensorImage)
         inferenceTime = SystemClock.uptimeMillis() - inferenceTime
+
+//        // Proses hasil inferensi
+//        results?.forEach { detection ->
+//            val boundingBox = detection.boundingBox // Koordinat bounding box
+//            val categories = detection.categories  // Informasi kategori dan skor
+//
+//            // Log hasil deteksi objek
+//            categories.forEach { category ->
+//                Log.d(TAG, "Label: ${category.label}, Score: ${category.score}")
+//            }
+//
+//            // Optional: Log informasi bounding box (misalnya koordinat)
+//            Log.d(TAG, "BoundingBox: $boundingBox")
+//        }
+
+
         detectorListener?.onResults(
             results,
             inferenceTime,

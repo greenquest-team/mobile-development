@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.dicoding.greenquest.data.Repository
+import com.dicoding.greenquest.data.local.entity.QuestEntity
 import com.dicoding.greenquest.data.prefs.UserModel
 import kotlinx.coroutines.launch
 
@@ -26,5 +27,11 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
         }
     }
 
-    fun getAllStory() = repository.getAllStory()
+    fun getQuest() = repository.getQuest()
+
+    fun updateQuest(quest: QuestEntity) {
+        viewModelScope.launch {
+            repository.updateQuest(quest, true)
+        }
+    }
 }

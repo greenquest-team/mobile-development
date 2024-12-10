@@ -2,6 +2,8 @@ package com.dicoding.greenquest.data.remote.retrofit
 
 import com.dicoding.greenquest.data.remote.response.LeaderboardResponse
 import com.dicoding.greenquest.data.remote.response.LoginResponse
+import com.dicoding.greenquest.data.remote.response.MaterialResponse
+import com.dicoding.greenquest.data.remote.response.QuestResponse
 import com.dicoding.greenquest.data.remote.response.RegisterResponse
 import com.dicoding.greenquest.data.remote.response.StoryResponse
 import com.dicoding.greenquest.data.remote.response.WasteTypeResponse
@@ -34,9 +36,14 @@ interface ApiService {
         @Field("password") password: String
     ): RegisterResponse
 
-    @GET("stories")
-    suspend fun getStories(): StoryResponse
+    @GET("quests")
+    suspend fun getQuest(): QuestResponse
 
     @GET("leaderboard")
     suspend fun getLeaderboard(): LeaderboardResponse
+
+    @GET("materials")
+    suspend fun getMaterial(
+        @Query("type_name") query: String
+    ): MaterialResponse
 }

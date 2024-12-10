@@ -12,7 +12,7 @@ import com.dicoding.greenquest.data.local.entity.QuestEntity
 
 @Database(
     entities = [QuestEntity::class, LeaderboardEntity::class],
-    version = 4,
+    version = 6,
     exportSchema = false
 )
 abstract class QuestDatabase : RoomDatabase() {

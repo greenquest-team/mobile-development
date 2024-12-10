@@ -11,12 +11,15 @@ import com.dicoding.greenquest.data.local.entity.QuestEntity
 
 @Dao
 interface QuestDao {
+    @Query("SELECT * FROM UserQuest WHERE createdAt BETWEEN :startOfDay AND :endOfDay")
+    fun getQuestByDateRange(startOfDay: Long, endOfDay: Long): List<QuestEntity>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(story: List<QuestEntity>)
+    suspend fun insertAll(quests: List<QuestEntity>)
 
-    @Query("SELECT * FROM Story ORDER BY createdAt DESC")
-    fun getAllStory(): LiveData<List<QuestEntity>>
+    @Query("DELETE FROM UserQuest")
+    suspend fun deleteAll()
 
-    @Query("DELETE FROM Story")
-    suspend fun deleteAllHealthNews()
+    @Update
+    suspend fun updateQuest(quests: QuestEntity)
 }

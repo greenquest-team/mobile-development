@@ -7,22 +7,19 @@ import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-@Entity(tableName = "Story")
+@Entity(tableName = "UserQuest")
 data class QuestEntity(
-    @field:ColumnInfo(name = "id")
-    @field:PrimaryKey
-    val id: String,
-
-    @field:ColumnInfo(name = "image")
-    val image: String?,
-
-    @field:ColumnInfo(name = "username")
-    val username: String?,
-
-    @field:ColumnInfo(name = "description")
-    val description: String?,
-
-    @field:ColumnInfo(name = "createdAt")
-    val createdAt: String?,
-
+    @PrimaryKey(autoGenerate = true) val id: Int,
+    val questId: Int,
+    val userId: Int,
+    val materialId: Int,
+    val typeName: String,
+    val descriptionQuest: String,
+    val image: String,
+    val wasteTypesId: Int,
+    val questType: String,
+    val progress: Int,
+    var isCompleted: Boolean,
+    val createdAt: Long = System.currentTimeMillis(),
+    val pointsAwarded: Int,
     ) : Parcelable

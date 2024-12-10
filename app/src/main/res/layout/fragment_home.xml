@@ -205,6 +205,21 @@
             app:layout_constraintTop_toTopOf="@+id/btnLihat"
             app:layout_constraintVertical_bias="0.50" />
 
+        <TextView
+            android:id="@+id/tvNoQuestMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/quest_complete"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/rv_quest"
+            app:layout_constraintEnd_toEndOf="@+id/rv_quest"
+            app:layout_constraintStart_toStartOf="@+id/rv_quest"
+            app:layout_constraintTop_toTopOf="@+id/rv_quest"
+            tools:visibility="visible" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_quest"
             android:layout_width="match_parent"
@@ -220,16 +235,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvQuestTitle" />
 
-        <!--    <Button-->
-        <!--        android:id="@+id/logout_button"-->
-        <!--        android:layout_width="wrap_content"-->
-        <!--        android:layout_height="wrap_content"-->
-        <!--        android:layout_marginTop="24dp"-->
-        <!--        android:text="@string/logout"-->
-        <!--        app:layout_constraintEnd_toEndOf="@+id/button"-->
-        <!--        app:layout_constraintStart_toStartOf="@+id/button"-->
-        <!--        app:layout_constraintTop_toBottomOf="@+id/button" />-->
-
         <View
             android:id="@+id/view_loading"
             android:layout_width="0dp"
@@ -239,8 +244,10 @@
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/progress_bar"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
             tools:visibility="visible" />
 
         <ProgressBar
