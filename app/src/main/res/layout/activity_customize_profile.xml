@@ -1,17 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
     android:background="@drawable/gradient_radial_green"
+    android:fillViewport="true"
     tools:context=".ui.home.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/btnEditProfilePic"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:clickable="true"
+            android:src="@drawable/baseline_edit_18"
+            app:backgroundTint="#F6CF0F"
+            app:layout_constraintBottom_toBottomOf="@+id/ivAvatar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/ivAvatar"
+            app:layout_constraintTop_toTopOf="@+id/ivAvatar"
+            app:layout_constraintVertical_bias="1.0" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnBack"
@@ -99,8 +112,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
-            android:text="nama"
             android:fontFamily="@font/gabarito_bold"
+            android:text="nama"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:translationZ="12dp"
@@ -113,14 +126,14 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputNama"
-            app:boxBackgroundColor="#FEFAE0"
-            app:boxStrokeColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-20dp"
             android:layout_marginStart="24dp"
+            android:layout_marginTop="-20dp"
             android:layout_marginEnd="24dp"
             android:translationZ="8dp"
+            app:boxBackgroundColor="#FEFAE0"
+            app:boxStrokeColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -131,10 +144,10 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:textColor="#949494"
                 android:fontFamily="@font/gabarito_medium"
-                android:text="Ray" />
+                android:inputType="text"
+                android:text="Ray"
+                android:textColor="#949494" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -143,8 +156,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
-            android:text="username"
             android:fontFamily="@font/gabarito_bold"
+            android:text="username"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:translationZ="12dp"
@@ -157,14 +170,14 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputUsername"
-            app:boxBackgroundColor="#FEFAE0"
-            app:boxStrokeColor="@color/black"
-            android:layout_marginTop="-20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
+            android:layout_marginTop="-20dp"
             android:layout_marginEnd="24dp"
             android:translationZ="8dp"
+            app:boxBackgroundColor="#FEFAE0"
+            app:boxStrokeColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -175,10 +188,10 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:textColor="#949494"
                 android:fontFamily="@font/gabarito_medium"
-                android:text="ray123" />
+                android:inputType="text"
+                android:text="ray123"
+                android:textColor="#949494" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -187,8 +200,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
-            android:text="email"
             android:fontFamily="@font/gabarito_bold"
+            android:text="email"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:translationZ="12dp"
@@ -201,14 +214,14 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputEmail"
-            app:boxBackgroundColor="#FEFAE0"
-            app:boxStrokeColor="@color/black"
-            android:layout_marginTop="-20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
+            android:layout_marginTop="-20dp"
             android:layout_marginEnd="24dp"
             android:translationZ="8dp"
+            app:boxBackgroundColor="#FEFAE0"
+            app:boxStrokeColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -219,10 +232,10 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#949494"
-                android:inputType="textEmailAddress"
                 android:fontFamily="@font/gabarito_medium"
-                android:text="ray@gmail.com" />
+                android:inputType="textEmailAddress"
+                android:text="ray@gmail.com"
+                android:textColor="#949494" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -231,8 +244,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
-            android:text="tanggal lahir"
             android:fontFamily="@font/gabarito_bold"
+            android:text="tanggal lahir"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:translationZ="12dp"
@@ -245,14 +258,14 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputTanggalLahir"
-            app:boxBackgroundColor="#FEFAE0"
-            app:boxStrokeColor="@color/black"
-            android:layout_marginTop="-20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
+            android:layout_marginTop="-20dp"
             android:layout_marginEnd="24dp"
             android:translationZ="8dp"
+            app:boxBackgroundColor="#FEFAE0"
+            app:boxStrokeColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -263,11 +276,11 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#949494"
                 android:ems="10"
-                android:inputType="date"
                 android:fontFamily="@font/gabarito_medium"
-                android:text="16/01/2019" />
+                android:inputType="date"
+                android:text="16/01/2019"
+                android:textColor="#949494" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -276,8 +289,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
-            android:text="password"
             android:fontFamily="@font/gabarito_bold"
+            android:text="password"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:translationZ="12dp"
@@ -290,14 +303,14 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputPassword"
-            app:boxBackgroundColor="#FEFAE0"
-            app:boxStrokeColor="@color/black"
-            android:layout_marginTop="-20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
+            android:layout_marginTop="-20dp"
             android:layout_marginEnd="24dp"
             android:translationZ="8dp"
+            app:boxBackgroundColor="#FEFAE0"
+            app:boxStrokeColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -308,10 +321,10 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#949494"
-                android:inputType="textPassword"
                 android:fontFamily="@font/gabarito_medium"
-                android:text="Sa****Ma***456" />
+                android:inputType="textPassword"
+                android:text="Sa****Ma***456"
+                android:textColor="#949494" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <View
@@ -360,6 +373,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/vBottomSheet"
             app:layout_constraintVertical_bias="0.0" />
+
+        <GridView
+            android:id="@+id/gridView"
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:background="@drawable/card_grey"
+            android:horizontalSpacing="8dp"
+            android:numColumns="3"
+            android:gravity="center"
+            android:translationZ="24dp"
+            android:verticalSpacing="8dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.19999999" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
