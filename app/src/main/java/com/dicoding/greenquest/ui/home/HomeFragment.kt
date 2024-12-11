@@ -16,6 +16,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.dicoding.greenquest.ui.scan.ScanActivity
 import com.dicoding.greenquest.R
 import com.dicoding.greenquest.ViewModelFactory
@@ -59,6 +61,11 @@ class HomeFragment : Fragment() {
 
         homeViewModel.getSession().observe(viewLifecycleOwner) { user ->
             binding.textUsername.text = "Hey ${user.name}"
+            Glide.with(binding.root.context)
+                .load(user.image)
+                .apply(RequestOptions.placeholderOf(R.drawable.ic_placeholder))
+                .error(R.drawable.ic_error)
+                .into(binding.ivAvatar)
         }
 
         binding.circularProgressBar.progressMax = 100f

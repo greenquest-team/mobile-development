@@ -19,7 +19,7 @@ class LeaderboardAdapter : ListAdapter<LeaderboardEntity, LeaderboardAdapter.MyV
             binding.textUsernameLeaderboard.text = leaderboard.username.toString()
             binding.textPointsEarned.text = "${leaderboard.points.toString()} points"
             Glide.with(binding.root.context)
-                .load(R.drawable.test_image)
+                .load(leaderboard.avatar)
                 .apply(RequestOptions.placeholderOf(R.drawable.ic_placeholder))
                 .error(R.drawable.ic_error)
                 .into(binding.ivAvatarLeaderboard)

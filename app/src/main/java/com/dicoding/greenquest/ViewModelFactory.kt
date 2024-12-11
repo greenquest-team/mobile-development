@@ -5,11 +5,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.greenquest.data.Repository
 import com.dicoding.greenquest.di.Injection
+import com.dicoding.greenquest.ui.customizeprofile.CustomizeProfileViewModel
 import com.dicoding.greenquest.ui.home.HomeViewModel
 import com.dicoding.greenquest.ui.leaderboard.LeaderboardViewModel
 import com.dicoding.greenquest.ui.login.LoginViewModel
 import com.dicoding.greenquest.ui.main.MainViewModel
 import com.dicoding.greenquest.ui.materi.MateriViewModel
+import com.dicoding.greenquest.ui.mission.MissionViewModel
 import com.dicoding.greenquest.ui.profile.ProfilesViewModel
 import com.dicoding.greenquest.ui.register.SignupViewModel
 import com.dicoding.greenquest.ui.scan.ScanViewModel
@@ -42,6 +44,12 @@ class ViewModelFactory(private val repository: Repository) : ViewModelProvider.N
             }
             modelClass.isAssignableFrom(MateriViewModel::class.java) -> {
                 MateriViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(MissionViewModel::class.java) -> {
+                MissionViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(CustomizeProfileViewModel::class.java) -> {
+                CustomizeProfileViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

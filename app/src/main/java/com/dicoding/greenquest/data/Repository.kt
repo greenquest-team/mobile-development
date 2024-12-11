@@ -14,6 +14,8 @@ import com.dicoding.greenquest.data.remote.response.LoginResponse
 import com.dicoding.greenquest.data.remote.response.MaterialPayloadItem
 import com.dicoding.greenquest.data.remote.response.QuestScanItem
 import com.dicoding.greenquest.data.remote.response.RegisterResponse
+import com.dicoding.greenquest.data.remote.response.UserPayload
+import com.dicoding.greenquest.data.remote.response.UserResponse
 import com.dicoding.greenquest.data.remote.response.WasteTypePayloadItem
 import com.dicoding.greenquest.data.remote.retrofit.ApiService
 import com.dicoding.greenquest.getEndOfLocalDay
@@ -56,6 +58,31 @@ class Repository private constructor(
 
     suspend fun register(name: String, username: String, email: String, tglLahir: String, password: String): RegisterResponse {
         return apiService.register(name, username, email, tglLahir, password)
+    }
+
+    suspend fun updateUser(
+        userId: Int,
+        name: String,
+        username: String,
+        email: String,
+        tglLahir: String,
+        points: Int,
+        avatar: String,
+        password: String
+    ): UserResponse {
+        // Buat payload
+        val payload = UserPayload(
+            id = userId,
+            name = name,
+            username = username,
+            email = email,
+            tglLahir = tglLahir,
+            points = points.toString(),
+            avatar = avatar,
+            password = password
+        )
+        // Panggil API
+        return apiService.updateUser(userId, payload)
     }
 
     fun getQuest(): LiveData<Result<List<QuestEntity>>> = liveData(Dispatchers.IO) {
@@ -119,6 +146,7 @@ class Repository private constructor(
                 LeaderboardEntity(
                     username = leaderboard.username,
                     points = leaderboard.points,
+                    avatar = leaderboard.avatar.toString(),
                 )
             }
             leaderboardDao.deleteAllLeadeboardData()

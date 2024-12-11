@@ -21,17 +21,19 @@ class LoginViewModel(private val repository: Repository) : ViewModel() {
     try {
         val dataUser = repository.login(username, password)
         Log.d("LoginViewModel", "Success: ${dataUser.message}")
-        dataUser.payload?.let { user ->
+        dataUser.payload.let { user ->
             saveSession(UserModel(
                 user_id = user.user.id,
-                name = user.user.name.toString(),
+                name = user.user.name,
                 username = username,
-                email = user.user.email.toString(),
+                email = user.user.email,
                 password = password,
-                token = user.token.toString()
+                token = user.token,
+                image = user.user.avatar,
+                points = user.user.points
             ))
-            ApiConfig.setToken(user.token.toString())
-            Injection.updateRepositoryToken(user.token.toString())
+            ApiConfig.setToken(user.token)
+            Injection.updateRepositoryToken(user.token)
         }
 
         emit(Result.Success(dataUser.message))

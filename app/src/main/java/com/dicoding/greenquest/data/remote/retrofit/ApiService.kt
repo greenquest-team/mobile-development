@@ -6,11 +6,15 @@ import com.dicoding.greenquest.data.remote.response.MaterialResponse
 import com.dicoding.greenquest.data.remote.response.QuestResponse
 import com.dicoding.greenquest.data.remote.response.RegisterResponse
 import com.dicoding.greenquest.data.remote.response.StoryResponse
+import com.dicoding.greenquest.data.remote.response.UserPayload
+import com.dicoding.greenquest.data.remote.response.UserResponse
 import com.dicoding.greenquest.data.remote.response.WasteTypeResponse
+import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
@@ -46,4 +50,10 @@ interface ApiService {
     suspend fun getMaterial(
         @Query("type_name") query: String
     ): MaterialResponse
+
+    @POST("users/{id}")
+    suspend fun updateUser(
+        @Path("id") userId: Int,
+        @Body userPayload: UserPayload
+    ): UserResponse
 }

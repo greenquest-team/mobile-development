@@ -10,6 +10,7 @@ import com.dicoding.greenquest.R
 import com.dicoding.greenquest.databinding.ActivityMissionBinding
 import com.dicoding.greenquest.databinding.ActivityScanBinding
 import com.dicoding.greenquest.ui.home.HomeFragment
+import com.dicoding.greenquest.ui.main.MainActivity
 
 class MissionActivity : AppCompatActivity() {
 
@@ -20,6 +21,6 @@ class MissionActivity : AppCompatActivity() {
         binding = ActivityMissionBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnMisi.setOnClickListener { startActivity(Intent(this, HomeFragment::class.java)) }
+        binding.btnMisi.setOnClickListener { startActivity(Intent(this, MainActivity::class.java)) }
     }
 }

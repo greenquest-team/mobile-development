@@ -24,6 +24,8 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
             preferences[EMAIL_KEY] = user.email
             preferences[PASSWORD] = user.password
             preferences[TOKEN_KEY] = user.token
+            preferences[IMAGE] = user.image
+            preferences[POINTS] = user.points
             preferences[IS_LOGIN_KEY] = true
             Log.d("UserPreference", "Session saved successfully")
         }
@@ -40,6 +42,8 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
                 preferences[EMAIL_KEY] ?:"",
                 preferences[PASSWORD] ?: "",
                 preferences[TOKEN_KEY] ?: "",
+                preferences[IMAGE] ?: "",
+                preferences[POINTS] ?: "0",
                 preferences[IS_LOGIN_KEY] ?: false
             )
         }
@@ -61,6 +65,8 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
         private val USERNAME = stringPreferencesKey("username")
         private val PASSWORD = stringPreferencesKey("password")
         private val TOKEN_KEY = stringPreferencesKey("token")
+        private val IMAGE = stringPreferencesKey("image")
+        private val POINTS = stringPreferencesKey("points")
         private val IS_LOGIN_KEY = booleanPreferencesKey("isLogin")
 
         fun getInstance(dataStore: DataStore<Preferences>): UserPreference {

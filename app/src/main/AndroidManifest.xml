@@ -25,7 +25,7 @@
             android:name=".ui.quiz.QuizActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.CustomizeProfileActivity"
+            android:name=".ui.customizeprofile.CustomizeProfileActivity"
             android:exported="false" />
         <activity
             android:name=".ui.materi.MateriActivity"

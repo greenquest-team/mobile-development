@@ -19,6 +19,9 @@ data class PayloadItem(
 	@field:SerializedName("id")
 	val id: Int? = null,
 
+	@field:SerializedName("avatar")
+	val avatar: String? = null,
+
 	@field:SerializedName("username")
 	val username: String? = null,
 
