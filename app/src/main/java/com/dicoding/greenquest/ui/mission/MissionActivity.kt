@@ -36,6 +36,11 @@ class MissionActivity : AppCompatActivity() {
                 binding.rvMisi.adapter = adapter
             } else {
                 showToast("no history found")
+                binding.rvMisi.visibility = View.INVISIBLE
+                binding.tvNoQuestMessage.apply {
+                    visibility = View.VISIBLE
+                    text = "Tidak ada quest yang kamu selesaikan sejauh ini"
+                }
             }
         }
     }
