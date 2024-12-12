@@ -4,12 +4,13 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
+    app:cardBackgroundColor="#A31F00"
     android:layout_margin="8dp">
 
     <View
         android:id="@+id/itemMisiBerlangsungGreen"
         android:layout_width="match_parent"
-        android:layout_height="230dp"
+        android:layout_height="200dp"
         android:background="@drawable/card_red"
         android:elevation="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -32,20 +33,6 @@
         app:srcCompat="@drawable/baseline_image_24" />
 
     <TextView
-        android:id="@+id/tvPoints"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="+90 points"
-        android:fontFamily="@font/gabarito_medium"
-        android:textColor="#FEFAE0"
-        android:textSize="20sp"
-        android:translationZ="12dp"
-        app:layout_constraintEnd_toEndOf="@+id/ivMisi"
-        app:layout_constraintStart_toStartOf="@+id/ivMisi"
-        app:layout_constraintTop_toBottomOf="@+id/ivMisi" />
-
-    <TextView
         android:id="@+id/tvMisiTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -60,24 +47,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ivMisi"
         app:layout_constraintTop_toTopOf="@+id/ivMisi" />
-
-    <Button
-        android:id="@+id/btnMulaiMisi"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="194dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="lanjutkan"
-        android:textSize="18sp"
-        android:textColor="#3A3128"
-        android:fontFamily="@font/gabarito_bold"
-        android:backgroundTint="#F6CF0F"
-        android:textAllCaps="false"
-        android:translationZ="12dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/tvMisiTitle"
-        app:layout_constraintStart_toStartOf="@+id/tvMisiTitle"
-        app:layout_constraintTop_toBottomOf="@+id/tvMisiTitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,20 +1,21 @@
 package com.dicoding.greenquest.ui.mission
 
-import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.view.View
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.dicoding.greenquest.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.dicoding.greenquest.ViewModelFactory
 import com.dicoding.greenquest.databinding.ActivityMissionBinding
-import com.dicoding.greenquest.databinding.ActivityScanBinding
-import com.dicoding.greenquest.ui.home.HomeFragment
-import com.dicoding.greenquest.ui.main.MainActivity
 
 class MissionActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMissionBinding
+
+    private val missionViewModel: MissionViewModel by viewModels {
+        ViewModelFactory.getInstance(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,5 +23,31 @@ class MissionActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnMisi.setOnClickListener { finish() }
+
+        val layoutManagerBerlangsung = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.rvMisi.layoutManager = layoutManagerBerlangsung
+
+        missionViewModel.getQuestCompleted().observe(this) { questList ->
+            showLoading(true)
+            if (questList != null && questList.isNotEmpty()) {
+                showLoading(false)
+                val adapter = RiwayatMissionAdapter()
+                adapter.submitList(questList)
+                binding.rvMisi.adapter = adapter
+            } else {
+                showToast("no history found")
+            }
+        }
+    }
+
+
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.viewLoading.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

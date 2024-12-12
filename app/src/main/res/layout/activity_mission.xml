@@ -23,20 +23,20 @@
             android:textColor="#FEFAE0"
             android:drawableLeft="@drawable/arrow_left_white_16"
             android:fontFamily="@font/gabarito_bold"
-            android:text="Misi hari ini"
+            android:text="Riwayat misi"
             android:textSize="16dp"
             android:textAllCaps="false"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvBerlangsung"
+            android:id="@+id/tvRiwayatMisi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/gabarito_bold"
-            android:text="berlangsung"
+            android:text="@string/semua_misimu_yang_telah_selesai"
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -45,40 +45,60 @@
             app:layout_constraintTop_toBottomOf="@+id/btnMisi" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvBerlangsung"
+            android:id="@+id/rvMisi"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
+            android:nestedScrollingEnabled="false"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvBerlangsung" />
+            app:layout_constraintTop_toBottomOf="@+id/tvRiwayatMisi"
+            app:layout_constraintVertical_bias="0.00999999" />
 
         <TextView
-            android:id="@+id/tvSelesai"
+            android:id="@+id/tvNoQuestMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="selesai"
-            android:fontFamily="@font/gabarito_bold"
+            android:layout_gravity="center"
+            android:elevation="25dp"
+            android:text="@string/quest_complete"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="16sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/rvMisi"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/rvMisi"
+            tools:visibility="visible" />
+
+        <View
+            android:id="@+id/view_loading"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:alpha="0.5"
+            android:background="@color/white"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rvBerlangsung" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            tools:visibility="visible" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvSelesai"
-            android:layout_width="match_parent"
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvSelesai" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

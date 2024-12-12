@@ -57,9 +57,8 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
 
 //         Aksi pada tombol "Lihat"
-        binding.btnLihat.setOnClickListener {
-            val intent = Intent(requireContext(), ScanActivity::class.java)
-            startActivity(intent)
+        binding.btnRiwayat.setOnClickListener {
+            startActivity(Intent(requireContext(), MissionActivity::class.java))
         }
 
         homeViewModel.getSession().observe(viewLifecycleOwner) { user ->
@@ -77,9 +76,6 @@ class HomeFragment : Fragment() {
 
         val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.rvQuest.layoutManager = layoutManager
-        binding.btnLihat.setOnClickListener {
-          startActivity(Intent(requireContext(), MissionActivity::class.java))
-        }
 
         observeViewModel()
 

@@ -119,7 +119,11 @@ class QuizActivity : AppCompatActivity() {
                     Log.d("QuizActivity", "Success: ${result.data}")
                     val points = result.data.payload.pointsAwarded
                     val correctAnswer = result.data.payload.correctAnswers
-                     showAlert("Yeah", " jawaban anda benar $correctAnswer Kamu berhasil mendapatkan $points poin", points)
+                     if (points == 0) {
+                         showAlert("Coba lagi ya", "semua jawabanmu salah. Tapi tenang, masih ada hari esok :)", points)
+                     } else {
+                         showAlert("Yeah", " jawaban anda benar $correctAnswer Kamu berhasil mendapatkan $points poin", points)
+                     }
 
                 }
                 is Result.Error -> {
@@ -160,7 +164,6 @@ class QuizActivity : AppCompatActivity() {
                 val intent = Intent(context, MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                 startActivity(intent)
-                finish()
             }
             create()
             show()

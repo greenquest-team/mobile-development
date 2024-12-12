@@ -50,7 +50,7 @@ class LoginActivity : AppCompatActivity() {
                 }
                 is Result.Success -> {
                     showLoading(false)
-                    showAlert("Yeah!", "Anda telah berhasil login. Yuk ceritakan pengalaman Anda!")
+                    showAlert("Yeah!", "Anda telah berhasil login. Yuk mulai petualanganmu bersama GreenQuest! :D")
                     Log.d("LoginActivity", "Success: ${result.data}")
                 }
                 is Result.Error -> {

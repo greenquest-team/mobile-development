@@ -138,6 +138,10 @@ class Repository private constructor(
         }
     }
 
+    fun getQuestCompleted(): LiveData<List<QuestEntity>> {
+        return questDao.getQuestIsCompleted()
+    }
+
     suspend fun updateQuest(quest: QuestEntity, completedState: Boolean) {
         quest.isCompleted = completedState
         questDao.updateQuest(quest)
@@ -197,7 +201,7 @@ class Repository private constructor(
             emit(Result.Success(quizzez))
 
         } catch (e: Exception) {
-            Log.e("Repository", "getMaterials: ${e.message.toString()}")
+            Log.e("Repository", "getQuiz: ${e.message.toString()}")
             emit(Result.Error(e.message.toString()))
         }
     }

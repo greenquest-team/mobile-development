@@ -107,13 +107,12 @@ class ProfilesFragment : Fragment() {
 
                     val data = result.data
 
-
                     // Filter quest yang belum selesai
                     val completeQuests = data.filter { it.isCompleted }
 
                     if (completeQuests.isEmpty()) {
                         // Jika semua quest selesai, tampilkan pesan
-                        binding.rvHistory.visibility = View.GONE
+                        binding.rvHistory.visibility = View.INVISIBLE
                         binding.tvNoQuestMessage.apply {
                             visibility = View.VISIBLE
                             text = "Anda Belum menyelesaikan quest satupun hari ini"

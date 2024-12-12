@@ -141,7 +141,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnLihat"
+            app:layout_constraintTop_toBottomOf="@+id/btnRiwayat"
             app:layout_constraintVertical_bias="0.0" />
 
         <com.mikhaellopez.circularprogressbar.CircularProgressBar
@@ -177,7 +177,7 @@
             app:layout_constraintTop_toTopOf="@+id/circularProgressBar" />
 
         <TextView
-            android:id="@+id/btnLihat"
+            android:id="@+id/btnRiwayat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -200,9 +200,9 @@
             android:layout_marginEnd="16dp"
             android:background="@drawable/icon_arrow_right"
             android:elevation="12dp"
-            app:layout_constraintBottom_toBottomOf="@+id/btnLihat"
+            app:layout_constraintBottom_toBottomOf="@+id/btnRiwayat"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/btnLihat"
+            app:layout_constraintTop_toTopOf="@+id/btnRiwayat"
             app:layout_constraintVertical_bias="0.50" />
 
         <TextView

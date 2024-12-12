@@ -10,7 +10,7 @@
     <string name="username">Ray</string>
     <string name="points_count">1356 points</string>
     <string name="informasi_pribadi">Informasi Pribadi</string>
-    <string name="peringkat">Yuk, cek peringkat teratas 10 saat ini</string>
+    <string name="peringkat">Yuk, cek peringkat teratas saat ini</string>
     <string name="progressmu_sampai_mana">Progressmu sampai mana?</string>
 
     <string name="btn_scan">Scan</string>
@@ -44,5 +44,9 @@
     <string name="point_leadderboard">100</string>
     <string name="username_leaderboard">Username User</string>
     <string name="progress_home">0%</string>
-    <string name="btnMissionText">lihat</string>
+    <string name="btnMissionText">riwayat</string>
+    <string name="text_cek_leaderboard">cek leaderboard</string>
+    <string name="lihat_profile_btn">lihat</string>
+    <string name="start_btn_text">mulai</string>
+    <string name="semua_misimu_yang_telah_selesai">Semua misimu yang telah selesai</string>
 </resources>

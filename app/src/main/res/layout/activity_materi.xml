@@ -82,7 +82,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
             android:text="selesai membaca"
-            android:textSize="16sp"
+            android:textSize="20sp"
             android:textColor="#FEFAE0"
             android:fontFamily="@font/gabarito_bold"
             android:textAllCaps="false"
