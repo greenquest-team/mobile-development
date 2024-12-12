@@ -11,14 +11,14 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="80dp"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/main"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.scan.ScanActivity">
+            android:id="@+id/main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.scan.ScanActivity">
 
             <androidx.camera.view.PreviewView
                 android:id="@+id/viewFinder"
@@ -31,19 +31,40 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.504"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView2" >
+                app:layout_constraintTop_toBottomOf="@+id/textView2">
 
             </androidx.camera.view.PreviewView>
 
-            <com.dicoding.greenquest.ui.customView.OverlayView
-                android:id="@+id/overlay"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="@+id/viewFinder"
-                app:layout_constraintEnd_toEndOf="@+id/viewFinder"
-                app:layout_constraintStart_toStartOf="@+id/viewFinder"
-                app:layout_constraintTop_toTopOf="@+id/viewFinder"
-                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/tvResult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#BFFFFFFF"
+                android:gravity="center"
+                android:lines="1"
+                android:maxLines="1"
+                android:padding="16dp"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toBottomOf="@id/viewFinder"
+                app:layout_constraintEnd_toEndOf="@id/viewFinder"
+                app:layout_constraintStart_toStartOf="@id/viewFinder"
+                tools:text="Result" />
+
+            <TextView
+                android:id="@+id/tvInferenceTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:lines="1"
+                android:padding="16dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@id/viewFinder"
+                app:layout_constraintStart_toStartOf="@id/viewFinder"
+                app:layout_constraintTop_toTopOf="@id/viewFinder"
+                tools:text="Inference Time" />
 
             <ImageView
                 android:id="@+id/imageView4"
@@ -56,15 +77,30 @@
                 app:srcCompat="@drawable/img_1"
                 tools:visibility="visible" />
 
-            <ImageView
-                android:id="@+id/imageViewFlash"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+            <TextView
+                android:id="@+id/objective"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="25sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:visibility="visible"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView4"
-                app:srcCompat="@drawable/img_spark"
+                android:text="@string/text_objective"
+                />
+
+
+            <Button
+                android:id="@+id/btn_scan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/scan_btn"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/viewFinder"
                 tools:visibility="visible" />
 
             <Button
@@ -82,7 +118,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/all_text_card"
                 android:layout_width="0dp"
-                android:layout_height="200dp"
+                android:layout_height="300dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
@@ -94,7 +130,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/btn_reset_scan"
                 tools:visibility="visible" />
 
-                <!-- Green Card -->
+            <!-- Green Card -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/green_card"
                 android:layout_width="0dp"
@@ -108,7 +144,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/all_text_card"
                 app:layout_constraintStart_toStartOf="@+id/all_text_card"
                 app:layout_constraintTop_toTopOf="@+id/all_text_card"
-                tools:visibility="visible" >
+                tools:visibility="visible">
 
                 <TextView
                     android:id="@+id/tv_green_card"
@@ -116,14 +152,14 @@
                     android:layout_height="match_parent"
                     android:gravity="start"
                     android:padding="16dp"
-                    android:visibility="gone"
                     android:text="Plastik merupakan......"
                     android:textColor="@android:color/black"
                     android:textSize="16sp"
+                    android:visibility="gone"
                     tools:visibility="visible" />
             </androidx.cardview.widget.CardView>
 
-                <!-- Pink Card -->
+            <!-- Pink Card -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/pink_card"
                 android:layout_width="0dp"
@@ -137,7 +173,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/all_text_card"
                 app:layout_constraintStart_toStartOf="@+id/all_text_card"
                 app:layout_constraintTop_toBottomOf="@+id/green_card"
-                tools:visibility="visible" >
+                tools:visibility="visible">
 
                 <TextView
                     android:id="@+id/tv_pink_card"
@@ -145,10 +181,10 @@
                     android:layout_height="wrap_content"
                     android:gravity="start"
                     android:padding="16dp"
-                    android:visibility="gone"
                     android:text="Kerajinan yang dapat dibuat dari plastik : lorem ipsum"
                     android:textColor="@android:color/black"
                     android:textSize="16sp"
+                    android:visibility="gone"
                     tools:visibility="visible" />
             </androidx.cardview.widget.CardView>
 
@@ -157,10 +193,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Silahkan klik &quot;kotak&quot; yang muncul di kamera"
+                android:text="Silahkan klik tombol &quot;'selesai scan'&quot;"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageViewFlash" />
+                app:layout_constraintTop_toBottomOf="@+id/objective" />
 
             <View
                 android:id="@+id/view_loading"

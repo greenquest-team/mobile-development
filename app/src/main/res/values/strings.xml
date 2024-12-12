@@ -27,6 +27,7 @@
     <string name="leaderboard">Leaderboard</string>
 
     <string name="reset_string_btn">Reset Scan</string>
+    <string name="scan_btn">Selesai Scan</string>
     <string name="email">Email :</string>
     <string name="password">Password :</string>
     <string name="login">Login</string>
@@ -36,4 +37,7 @@
     <string name="quiz_time">Quiz Time</string>
     <string name="desc_logo_greenquest">Logo Greenquest</string>
     <string name="quest_complete">Anda sudah menyelesaikan semua quest hari ini</string>
+
+    <string name="image_classifier_failed">Image classifier failed to initialize. See error logs for details</string>
+    <string name="text_objective">Objective: Scan</string>
 </resources>

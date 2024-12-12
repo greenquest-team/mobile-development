@@ -56,4 +56,11 @@ interface ApiService {
         @Path("id") userId: Int,
         @Body userPayload: UserPayload
     ): UserResponse
+
+    @FormUrlEncoded
+    @POST("users/{id}")
+    suspend fun updateUserPoints(
+        @Path("id") userId: Int,
+        @Field("points") points: String
+    ): UserResponse
 }

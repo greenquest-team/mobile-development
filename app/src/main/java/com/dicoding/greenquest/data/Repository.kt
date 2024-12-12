@@ -12,7 +12,6 @@ import com.dicoding.greenquest.data.prefs.UserModel
 import com.dicoding.greenquest.data.prefs.UserPreference
 import com.dicoding.greenquest.data.remote.response.LoginResponse
 import com.dicoding.greenquest.data.remote.response.MaterialPayloadItem
-import com.dicoding.greenquest.data.remote.response.QuestScanItem
 import com.dicoding.greenquest.data.remote.response.RegisterResponse
 import com.dicoding.greenquest.data.remote.response.UserPayload
 import com.dicoding.greenquest.data.remote.response.UserResponse
@@ -23,7 +22,9 @@ import com.dicoding.greenquest.getStartOfLocalDay
 import com.dicoding.greenquest.mapQuestResponseToEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 
 class Repository private constructor(
@@ -46,6 +47,10 @@ class Repository private constructor(
 
     fun getSession(): Flow<UserModel> {
         return userPreference.getSession()
+    }
+
+    suspend fun savePoints(points: Int) {
+        userPreference.savePoints(points)
     }
 
     suspend fun logout() {
@@ -83,6 +88,11 @@ class Repository private constructor(
         )
         // Panggil API
         return apiService.updateUser(userId, payload)
+    }
+
+    suspend fun updateUserPoints(userId: Int, points: Int, newPoints: Int): UserResponse {
+        val totalPoints = points + newPoints
+        return apiService.updateUserPoints(userId, totalPoints.toString())
     }
 
     fun getQuest(): LiveData<Result<List<QuestEntity>>> = liveData(Dispatchers.IO) {

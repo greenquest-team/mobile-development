@@ -8,7 +8,7 @@ data class UserResponse(
 	val code: Int,
 
 	@field:SerializedName("payload")
-	val payload: Payload,
+	val payload: UserPayload,
 
 	@field:SerializedName("message")
 	val message: String

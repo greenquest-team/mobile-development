@@ -32,6 +32,9 @@ class MateriActivity : AppCompatActivity() {
 
     private lateinit var quest: QuestEntity
 
+    private var userID = 0
+    private var points = 0
+
     companion object{
         const val QUEST_EXTRA = "quest_extra"
     }
@@ -42,6 +45,11 @@ class MateriActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         quest = intent.getParcelableExtra(QUEST_EXTRA)!!
+
+        materiViewModel.getSession().observe(this) { user ->
+            userID = user.user_id
+            points = user.points
+        }
 
         binding.btnBack.setOnClickListener { finish() }
 
@@ -111,6 +119,7 @@ class MateriActivity : AppCompatActivity() {
             setMessage(message)
             setPositiveButton("Ya") { _, _ ->
                 materiViewModel.updateQuest(quest)
+                updateUserPoints(userID, points, quest.pointsAwarded)
                 val intent = Intent(context, MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                 startActivity(intent)
@@ -119,5 +128,9 @@ class MateriActivity : AppCompatActivity() {
             create()
             show()
         }
+    }
+
+    private fun updateUserPoints(userId: Int, points: Int, newPoints: Int) {
+        materiViewModel.updateUserPoints(userId, points, newPoints)
     }
 }

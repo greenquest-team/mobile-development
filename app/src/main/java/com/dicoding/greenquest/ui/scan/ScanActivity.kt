@@ -8,6 +8,7 @@ import android.view.Surface
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
@@ -16,20 +17,22 @@ import androidx.camera.core.resolutionselector.AspectRatioStrategy
 import androidx.camera.core.resolutionselector.ResolutionSelector
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import com.dicoding.greenquest.ui.customView.OverlayView
 import com.dicoding.greenquest.ViewModelFactory
 import com.dicoding.greenquest.databinding.ActivityScanBinding
-import com.dicoding.greenquest.helper.ObjectDetectorHelper
-import org.tensorflow.lite.task.vision.detector.Detection
 import java.util.concurrent.Executors
 import com.dicoding.greenquest.data.Result
-import com.dicoding.greenquest.ui.home.HomeFragment
+import com.dicoding.greenquest.data.local.entity.QuestEntity
+import com.dicoding.greenquest.helper.ImageClassifierHelper
+import com.dicoding.greenquest.ui.main.MainActivity
 import com.google.common.util.concurrent.ListenableFuture
+import org.tensorflow.lite.task.vision.classifier.Classifications
+import java.text.NumberFormat
 
 class ScanActivity : AppCompatActivity() {
 
     companion object {
         const val TAG = "CameraActivity"
+        const val QUEST_EXTRA = "quest_extra"
     }
 
     private val showViewModel by viewModels<ScanViewModel> {
@@ -40,38 +43,68 @@ class ScanActivity : AppCompatActivity() {
     private lateinit var binding: ActivityScanBinding
     private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
-    private lateinit var objectDetectorHelper: ObjectDetectorHelper
+    private lateinit var imageClassifierHelper: ImageClassifierHelper
 
     private lateinit var label: String
     private var isCameraRunning: Boolean = true
 
+    private val labelToIndonesian = mapOf(
+        "metal" to "baja/metal",
+        "paper" to "kertas",
+        "plastic" to "plastik",
+        "cardboard" to "kardus",
+        "glass" to "kaca"
+    )
+
     private var isFlashlightOn: Boolean = false
     private lateinit var cameraManager: CameraManager
     private lateinit var cameraId: String
+
+    private var userID = 0
+    private var points = 0
+
+    private lateinit var quest: QuestEntity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityScanBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        if (!isFlashlightAvailable()) {
-            showToast("Flashlight tidak tersedia di perangkat ini.")
-            binding.imageViewFlash.isEnabled = false
-            binding.imageViewFlash.visibility = View.GONE
-        }
+        quest = intent.getParcelableExtra(QUEST_EXTRA)!!
 
-        binding.imageViewFlash.setOnClickListener { toggleFlashlight() }
+        showViewModel.getSession().observe(this) { user ->
+            userID = user.user_id
+            points = user.points
+        }
 
         binding.fabChecklist.setOnClickListener {
-            val intent = Intent(this@ScanActivity, HomeFragment::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(intent)
+            showAlert("Yeay", "kamu berhasil scan dan mendapatkan ilmu baru, kian hari kamu makin pintar :D")
         }
+
+        when (quest.typeName) {
+            "metal" -> {
+                binding.objective.text = "Objective: Scan sampah Baja/metal"
+            }
+            "paper" -> {
+                binding.objective.text = "Objective: Scan sampah kertas"
+            }
+            "plastic" -> {
+                binding.objective.text = "Objective: Scan sampah plastik"
+            }
+            "cardboard" -> {
+                binding.objective.text = "Objective: Scan sampah kardus"
+            }
+            "glass" -> {
+                binding.objective.text = "Objective: Scan sampah kaca"
+            }
+        }
+
+        binding.btnResetScan.visibility = View.GONE
 
         binding.btnResetScan.setOnClickListener {
             startCamera()
             binding.btnResetScan.visibility = View.GONE
-            binding.overlay.clear()
+            binding.btnScan.visibility = View.VISIBLE
             viewCardTextClose()
             showLoading(false)
         }
@@ -97,56 +130,55 @@ class ScanActivity : AppCompatActivity() {
     private fun startCamera() {
         isCameraRunning = true
 
-        objectDetectorHelper = ObjectDetectorHelper(
+        imageClassifierHelper = ImageClassifierHelper(
             context = this,
-            detectorListener = object : ObjectDetectorHelper.DetectorListener {
+            classifierListener = object : ImageClassifierHelper.ClassifierListener {
                 override fun onError(error: String) {
                     runOnUiThread {
-                        Toast.makeText(this@ScanActivity, error, Toast.LENGTH_SHORT).show()
+                       showToast("error")
                     }
                 }
-                override fun onResults(results: MutableList<Detection>?, inferenceTime: Long, imageHeight: Int, imageWidth: Int) {
+                override fun onResults(results: List<Classifications>?, inferenceTime: Long) {
                     runOnUiThread {
-                        results?.let {
+                        results?.let { it ->
                             if (it.isNotEmpty() && it[0].categories.isNotEmpty()) {
                                 println(it)
-
-//                                disini letak untuk menaruh custom view
-                                binding.overlay.setResults(
-                                    results, imageHeight, imageWidth
-                                )
-//
+                                val sortedCategories =
+                                    it[0].categories.sortedByDescending { it?.score }
+                                label = sortedCategories[0].label
+                                val displayResult =
+                                    sortedCategories.joinToString("\n") {
+                                        val translatedLabel = labelToIndonesian[it.label] ?: it.label
+                                        "$translatedLabel " + NumberFormat.getPercentInstance().format(it.score).trim()
+                                    }
+                                binding.tvResult.text = displayResult
+                                binding.tvInferenceTime.text = "$inferenceTime ms"
                             } else {
-                                binding.overlay.clear()
-//                                binding.tvInferenceTime.text = ""
+                                binding.tvResult.text = ""
+                                binding.tvInferenceTime.text = ""
                             }
                         }
-
-                        // Force a redraw
-                        binding.overlay.invalidate()
-
                     }
                 }
             }
         )
 
-        binding.overlay.setOnBoxClickListener(object : OverlayView.OnBoxClickListener {
-            override fun onBoxClicked(detection: Detection) {
-                if (!isCameraRunning) {
-                    // Jika kamera tidak aktif, abaikan klik
-                    return
+        binding.btnScan.setOnClickListener {
+            if (label.isNotEmpty()) {
+                if (label == quest.typeName) {
+                    stopCamera()
+                    binding.btnResetScan.visibility = View.VISIBLE
+                    binding.btnScan.visibility = View.GONE
+
+                    viewCardTextShow()
+                } else {
+                    showAlert("Maaf", "Hasil scan anda tidak sesuai dengan quest")
                 }
-
-                // Jalankan stopCamera saat kotak diklik
-                stopCamera()
-                binding.btnResetScan.visibility = View.VISIBLE
-
-                // Tampilkan informasi kotak yang diklik
-                label = detection.categories[0].label
-
-                viewCardTextShow()
+            } else {
+                showToast("Tidak ada hasil klasifikasi. Coba lagi.")
             }
-        })
+
+        }
 
 
         cameraProviderFuture = ProcessCameraProvider.getInstance(this)
@@ -164,7 +196,7 @@ class ScanActivity : AppCompatActivity() {
                 .build()
             // The analyzer can then be assigned to the instance
             imageAnalyzer.setAnalyzer(Executors.newSingleThreadExecutor()) { image ->
-                objectDetectorHelper.detectObject(image)
+                imageClassifierHelper.classifyImage(image)
             }
 
             val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
@@ -193,7 +225,6 @@ class ScanActivity : AppCompatActivity() {
         isCameraRunning = false
         ProcessCameraProvider.getInstance(this)
         cameraProviderFuture.get().unbindAll()
-        binding.overlay.setOnBoxClickListener(null)
 
         try {
             cameraManager.setTorchMode(cameraId, false)
@@ -208,18 +239,6 @@ class ScanActivity : AppCompatActivity() {
         return cameraManager.cameraIdList.any { id ->
             cameraManager.getCameraCharacteristics(id)
                 .get(android.hardware.camera2.CameraCharacteristics.FLASH_INFO_AVAILABLE) == true
-        }
-    }
-
-    private fun toggleFlashlight() {
-        try {
-            isFlashlightOn = !isFlashlightOn
-            cameraManager.setTorchMode(cameraId, isFlashlightOn)
-            val message = if (isFlashlightOn) "Flashlight ON" else "Flashlight OFF"
-            showToast(message)
-        } catch (e: Exception) {
-            showToast("Failed to toggle flashlight")
-            e.printStackTrace()
         }
     }
 
@@ -274,5 +293,37 @@ class ScanActivity : AppCompatActivity() {
 
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showAlert(title: String, message: String) {
+
+        if (title == "Error" || title == "Maaf") {
+            AlertDialog.Builder(this).apply {
+                setTitle(title)
+                setMessage(message)
+                setPositiveButton("OK", null)
+                create()
+                show()
+            }
+        } else {
+            AlertDialog.Builder(this).apply {
+                setTitle(title)
+                setMessage(message)
+                setPositiveButton("Yeah") { _, _ ->
+                    showViewModel.updateQuest(quest)
+                    updateUserPoints(userID, points, quest.pointsAwarded)
+                    val intent = Intent(context, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+                    finish()
+                }
+                create()
+                show()
+            }
+        }
+    }
+
+    private fun updateUserPoints(userId: Int, points: Int, newPoints: Int) {
+        showViewModel.updateUserPoints(userId, points, newPoints)
     }
 }

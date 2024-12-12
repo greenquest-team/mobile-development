@@ -25,15 +25,20 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
             preferences[PASSWORD] = user.password
             preferences[TOKEN_KEY] = user.token
             preferences[IMAGE] = user.image
+            preferences[TGL] = user.tgl
             preferences[POINTS] = user.points
             preferences[IS_LOGIN_KEY] = true
             Log.d("UserPreference", "Session saved successfully")
         }
     }
 
+    suspend fun savePoints(points: Int) {
+        dataStore.edit { preferences ->
+            preferences[POINTS] = points
+        }
+    }
+
     fun getSession(): Flow<UserModel> {
-
-
         return dataStore.data.map { preferences ->
             UserModel(
                 preferences[ID_KEY] ?: 0,
@@ -43,7 +48,8 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
                 preferences[PASSWORD] ?: "",
                 preferences[TOKEN_KEY] ?: "",
                 preferences[IMAGE] ?: "",
-                preferences[POINTS] ?: "0",
+                preferences[TGL] ?: "",
+                preferences[POINTS] ?: 0,
                 preferences[IS_LOGIN_KEY] ?: false
             )
         }
@@ -66,7 +72,8 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
         private val PASSWORD = stringPreferencesKey("password")
         private val TOKEN_KEY = stringPreferencesKey("token")
         private val IMAGE = stringPreferencesKey("image")
-        private val POINTS = stringPreferencesKey("points")
+        private val TGL = stringPreferencesKey("tgl")
+        private val POINTS = intPreferencesKey("points")
         private val IS_LOGIN_KEY = booleanPreferencesKey("isLogin")
 
         fun getInstance(dataStore: DataStore<Preferences>): UserPreference {

@@ -8,6 +8,7 @@ data class UserModel(
     val password: String,
     val token: String,
     val image: String,
-    val points: String,
+    val tgl: String,
+    val points: Int,
     val isLogin: Boolean = false
 )

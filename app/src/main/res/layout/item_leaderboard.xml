@@ -54,6 +54,7 @@
         android:layout_marginTop="4dp"
         android:scrollbarSize="16sp"
         android:fontFamily="@font/gabarito_bold"
+        android:drawableStart="@drawable/icon_medal"
         android:text="100"
         android:textColor="#90A287"
         android:textSize="12sp"
@@ -61,19 +62,6 @@
         app:layout_constraintStart_toStartOf="@+id/textUsernameLeaderboard"
         app:layout_constraintTop_toBottomOf="@+id/textUsernameLeaderboard"
         app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/textPointsDifference"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/gabarito_bold"
-        android:text="+3 points"
-        android:textColor="#234A2E"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/cardLeaderboard"
-        app:layout_constraintTop_toTopOf="@+id/textUsernameLeaderboard" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

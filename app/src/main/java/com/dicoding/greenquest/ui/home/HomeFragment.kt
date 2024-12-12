@@ -44,6 +44,9 @@ class HomeFragment : Fragment() {
 
     private var animatorSet: AnimatorSet? = null
 
+    private var userID = 0
+    private var points = 0
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -66,6 +69,8 @@ class HomeFragment : Fragment() {
                 .apply(RequestOptions.placeholderOf(R.drawable.ic_placeholder))
                 .error(R.drawable.ic_error)
                 .into(binding.ivAvatar)
+            userID = user.user_id
+            points = user.points
         }
 
         binding.circularProgressBar.progressMax = 100f
@@ -161,8 +166,9 @@ class HomeFragment : Fragment() {
                         val adapter = QuestAdapter { quest ->
                             when (quest.questType) {
                                 "scan" -> {
-                                    val detailActivityIntent = Intent(requireContext(), ScanActivity::class.java)
-                                    startActivity(detailActivityIntent)
+                                    val intent = Intent(requireContext(), ScanActivity::class.java)
+                                    intent.putExtra(ScanActivity.QUEST_EXTRA, quest)
+                                    startActivity(intent)
                                 }
                                 "material" -> {
                                     val intent = Intent(requireContext(), MateriActivity::class.java)
@@ -210,6 +216,10 @@ class HomeFragment : Fragment() {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
+    private fun updateUserPoints(userId: Int, points: Int, newPoints: Int) {
+        homeViewModel.updateUserPoints(userId, points, newPoints)
+    }
+
     private fun showAlert(title: String, message: String, quest: QuestEntity) {
         AlertDialog.Builder(requireContext()).apply {
             setTitle(title)
@@ -218,6 +228,8 @@ class HomeFragment : Fragment() {
                 // Tampilkan pesan keberhasilan
                 showToast("Yeah, kamu sudah berhasil menjadi pahlawan penjaga lingkungan!")
                 homeViewModel.updateQuest(quest)
+
+                updateUserPoints(userID, points, quest.pointsAwarded)
 
                 observeViewModel()
             }

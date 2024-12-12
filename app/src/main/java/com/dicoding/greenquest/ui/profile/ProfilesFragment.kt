@@ -49,6 +49,7 @@ class ProfilesFragment : Fragment() {
                 .apply(RequestOptions.placeholderOf(R.drawable.ic_placeholder))
                 .error(R.drawable.ic_error)
                 .into(binding.ivAvatar)
+            binding.pointsCount.text = "${user.points} points"
         }
 
         return binding.root
@@ -59,9 +60,6 @@ class ProfilesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // Example: Set points count dynamically
-        binding.pointsCount.text = "1200 Points" // Replace with actual points data
 
         binding.buttonLeaderboard.setOnClickListener {
             findNavController().navigate(

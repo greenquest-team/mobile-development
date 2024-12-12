@@ -30,7 +30,8 @@ class LoginViewModel(private val repository: Repository) : ViewModel() {
                 password = password,
                 token = user.token,
                 image = user.user.avatar,
-                points = user.user.points
+                tgl = user.user.tglLahir,
+                points = user.user.points.toInt()
             ))
             ApiConfig.setToken(user.token)
             Injection.updateRepositoryToken(user.token)

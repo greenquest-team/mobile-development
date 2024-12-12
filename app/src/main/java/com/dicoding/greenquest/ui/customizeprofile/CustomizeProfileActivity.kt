@@ -14,6 +14,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.dicoding.greenquest.R
 import com.dicoding.greenquest.ViewModelFactory
 import com.dicoding.greenquest.data.Result
+import com.dicoding.greenquest.data.prefs.UserModel
 import com.dicoding.greenquest.databinding.ActivityCustomizeProfileBinding
 import com.dicoding.greenquest.ui.home.HomeViewModel
 import com.dicoding.greenquest.ui.main.MainActivity
@@ -39,26 +40,32 @@ class CustomizeProfileActivity : AppCompatActivity() {
         binding.btnBack.setOnClickListener { finish() }
 
         customizeViewModel.getSession().observe(this) { user ->
-            binding.etName.setText(user.name)
-            binding.etUsername.setText(user.username)
-            binding.etEmail.setText(user.email)
-            Glide.with(binding.root.context)
-                .load(user.image)
-                .apply(RequestOptions.placeholderOf(R.drawable.ic_placeholder))
-                .error(R.drawable.ic_error)
-                .into(binding.ivAvatar)
+            if (user != null) {
+                Log.d("CustomizeProfileActivity", "Updated user: $user")
+                binding.etName.setText(user.name)
+                binding.etUsername.setText(user.username)
+                binding.etEmail.setText(user.email)
+                binding.etTgl.setText(user.tgl)
+                Glide.with(binding.root.context)
+                    .load(user.image)
+                    .apply(RequestOptions.placeholderOf(R.drawable.ic_placeholder))
+                    .error(R.drawable.ic_error)
+                    .into(binding.ivAvatar)
 
-            binding.buttonSimpan.setOnClickListener {
-                val userId = user.user_id
-                val name = binding.etName.text
-                val username = user.username
-                val email = user.email
-                val tgl = binding.etTgl.text
-                val points = user.points
-                val image = user.image
-                val password = if (binding.etPassword.text.isNullOrEmpty()) user.password else binding.etPassword.text.toString()
+                binding.buttonSimpan.setOnClickListener {
+                    val userId = user.user_id
+                    val name = binding.etName.text
+                    val username = user.username
+                    val email = user.email
+                    val tgl = binding.etTgl.text
+                    val points = user.points
+                    val image = user.image
+                    val password = if (binding.etPassword.text.isNullOrEmpty()) user.password else binding.etPassword.text.toString()
 
-                observeViewModeL(userId, name.toString(), username, email, tgl.toString(), points.toInt(), image, password)
+                    observeViewModeL(userId, name.toString(), username, email, tgl.toString(), points.toInt(), image, password)
+                }
+            } else {
+                showAlert("Error", "User tidak ditemukan. Silakan coba login kembali.")
             }
         }
     }
@@ -82,22 +89,23 @@ class CustomizeProfileActivity : AppCompatActivity() {
                 when (result) {
                     is Result.Loading -> {
                         showLoading(true)
-                        Log.d("LoginActivity", "Loading...")
+                        Log.d("CustomizeActivity", "Loading...")
                     }
                     is Result.Success -> {
                         showLoading(false)
                         showAlert("Yeah!", "Anda telah berhasil Update!")
-                        Log.d("LoginActivity", "Success: ${result.data}")
+                        Log.d("CustomizeActivity", "Success: ${result.data}")
+
                     }
                     is Result.Error -> {
                         showLoading(false)
                         showAlert("Error", result.error)
-                        Log.e("LoginActivity", "Error: ${result.error}")
+                        Log.e("CustomizeActivity", "Error: ${result.error}")
                     }
                     else -> {
                         showLoading(false)
                         showAlert("Error", "Unknown")
-                        Log.e("LoginActivity", "Unknown")
+                        Log.e("CustomizeActivity", "Unknown")
                     }
                 }
             }

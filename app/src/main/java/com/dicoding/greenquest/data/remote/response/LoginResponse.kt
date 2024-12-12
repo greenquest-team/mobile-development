@@ -8,7 +8,7 @@ data class LoginResponse(
 	val code: Int,
 
 	@field:SerializedName("payload")
-	val payload: Payload,
+	val payload: LoginPayload,
 
 	@field:SerializedName("message")
 	val message: String
@@ -47,7 +47,7 @@ data class UserLogin(
 	val points: String
 )
 
-data class Payload(
+data class LoginPayload(
 
 	@field:SerializedName("user")
 	val user: UserLogin,

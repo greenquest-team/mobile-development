@@ -2,6 +2,7 @@ package com.dicoding.greenquest.ui.customizeprofile
 
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
@@ -29,28 +30,42 @@ class CustomizeProfileViewModel(private val repository: Repository) : ViewModel(
         emit(Result.Loading)
         try {
             // Memanggil repository untuk mengupdate data user
+            var session: UserModel? = null
+            getSession().observeForever(object : Observer<UserModel> {
+                override fun onChanged(value: UserModel) {
+                    session = value
+                    getSession().removeObserver(this)
+                }
+            })
+
             val updatedUserResponse = repository.updateUser(
                 userId, name, username, email, tglLahir, points, avatar, password
             )
 
-            // Jika berhasil, simpan user terbaru ke datastore
-            val updatedUser = updatedUserResponse.payload.user
-            val curentsession = getSession().value
-            val token = curentsession?.token
-            saveSession(
-                UserModel(
-                    user_id = updatedUser.id,
-                    name = updatedUser.name,
-                    username = updatedUser.username,
-                    email = updatedUser.email,
-                    password = password,
-                    token = token!!, // Sesuaikan jika ada token
-                    image = updatedUser.avatar,
-                    points = updatedUser.points
-                )
-            )
+            val token = session?.token
 
-            emit(Result.Success(updatedUser))
+            Log.d("TOKEENNNN", "$token")
+
+            Log.d("CustomizeViewModel", "Success: ${updatedUserResponse.message}")
+
+            updatedUserResponse.payload.let { user ->
+                saveSession(
+                    UserModel(
+                        user_id = user.id,
+                        name = user.name,
+                        username = user.username,
+                        email = user.email,
+                        password = user.password,
+                        token = token!!,
+                        image = user.avatar,
+                        tgl = user.tglLahir,
+                        points = user.points.toInt()
+                    )
+                )
+            }
+
+
+            emit(Result.Success(updatedUserResponse.message))
         } catch (e: HttpException) {
             val errorBody = e.response()?.errorBody()?.string()
             val errorMessage = errorBody ?: "Unknown error occurred"
@@ -73,7 +88,12 @@ class CustomizeProfileViewModel(private val repository: Repository) : ViewModel(
 
     private fun saveSession(user: UserModel) {
         viewModelScope.launch {
-            repository.saveSession(user)
+            try {
+                repository.saveSession(user)
+                Log.d("CustomizeProfileViewModel", "Session updated: $user")
+            } catch (e: Exception) {
+                Log.e("CustomizeProfileViewModel", "Failed to save session: ${e.message}")
+            }
         }
     }
 
