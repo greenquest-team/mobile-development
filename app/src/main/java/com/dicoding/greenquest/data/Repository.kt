@@ -12,6 +12,8 @@ import com.dicoding.greenquest.data.prefs.UserModel
 import com.dicoding.greenquest.data.prefs.UserPreference
 import com.dicoding.greenquest.data.remote.response.LoginResponse
 import com.dicoding.greenquest.data.remote.response.MaterialPayloadItem
+import com.dicoding.greenquest.data.remote.response.QuizPayloadItem
+import com.dicoding.greenquest.data.remote.response.QuizPostResponse
 import com.dicoding.greenquest.data.remote.response.RegisterResponse
 import com.dicoding.greenquest.data.remote.response.UserPayload
 import com.dicoding.greenquest.data.remote.response.UserResponse
@@ -30,7 +32,6 @@ import kotlinx.coroutines.flow.map
 class Repository private constructor(
     private val userPreference: UserPreference,
     private val apiService: ApiService,
-    private val apiServiceDummy: ApiService,
     private val questDao: QuestDao,
     private val leaderboardDao: LeaderboardDao
 ){
@@ -86,7 +87,6 @@ class Repository private constructor(
             avatar = avatar,
             password = password
         )
-        // Panggil API
         return apiService.updateUser(userId, payload)
     }
 
@@ -124,15 +124,12 @@ class Repository private constructor(
                 val quizEntities = mapQuestResponseToEntity(questQuizList, userId)
                 val materialEntities = mapQuestResponseToEntity(questMaterialList, userId)
 
-                // Gabungkan semua entitas
                 val combinedEntities = (scanEntities + materialEntities + reminderEntities + quizEntities).map { entity ->
                     entity.copy(createdAt = System.currentTimeMillis()) // Tambahkan timestamp hari ini
                 }
 
-                // Simpan entitas ke database lokal
                 questDao.insertAll(combinedEntities)
 
-                // Kembalikan data baru
                 emit(Result.Success(combinedEntities))
             }
         } catch (e: Exception) {
@@ -177,19 +174,36 @@ class Repository private constructor(
             val response = apiService.getMaterial(query)
             val material = response.payload
 
-            Log.d("TEST", "try jalan")
-
             if (material.isEmpty()) {
                 emit(Result.Error("No material found for query: $query"))
             } else {
                 emit(Result.Success(material))
             }
 
+        } catch (e: Exception) {
+            Log.e("Repository", "getMaterials: ${e.message.toString()}")
+            emit(Result.Error(e.message.toString()))
+        }
+    }
+
+    fun getQuiz(query: String): LiveData<Result<List<QuizPayloadItem>>> = liveData(Dispatchers.IO) {
+        emit(Result.Loading)
+
+        try {
+            // Panggil API untuk mendapatkan data
+            val response = apiService.getQuiz(query)
+            val quizzez = response.payload
+
+            emit(Result.Success(quizzez))
 
         } catch (e: Exception) {
             Log.e("Repository", "getMaterials: ${e.message.toString()}")
             emit(Result.Error(e.message.toString()))
         }
+    }
+
+    suspend fun postQuiz(typeName: String, firstAnswer: String, secondAnswer: String): QuizPostResponse {
+        return apiService.postQuiz(typeName, firstAnswer, secondAnswer)
     }
 
     fun getWasteTypes(query: String): LiveData<Result<WasteTypePayloadItem>> = liveData(Dispatchers.IO) {
@@ -224,12 +238,11 @@ class Repository private constructor(
         fun getInstance(
             userPreference: UserPreference,
             apiService: ApiService,
-            apiServiceDummy: ApiService,
             questDao: QuestDao,
             leaderboardDao: LeaderboardDao
         ): Repository =
             instance ?: synchronized(this) {
-                instance ?: Repository(userPreference, apiService, apiServiceDummy, questDao, leaderboardDao)
+                instance ?: Repository(userPreference, apiService, questDao, leaderboardDao)
             }.also { instance = it }
     }
 }

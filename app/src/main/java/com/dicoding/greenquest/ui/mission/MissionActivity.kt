@@ -21,6 +21,6 @@ class MissionActivity : AppCompatActivity() {
         binding = ActivityMissionBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnMisi.setOnClickListener { startActivity(Intent(this, MainActivity::class.java)) }
+        binding.btnMisi.setOnClickListener { finish() }
     }
 }

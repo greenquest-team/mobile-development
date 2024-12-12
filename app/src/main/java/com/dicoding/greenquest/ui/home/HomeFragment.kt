@@ -154,6 +154,7 @@ class HomeFragment : Fragment() {
                     if (incompleteQuests.isEmpty()) {
                         // Jika semua quest selesai, tampilkan pesan
                         binding.rvQuest.visibility = View.GONE
+                        binding.tvMisiTitle.text = "semua quest hari ini sudah selesai, silahkan bersantai :D"
                         binding.tvNoQuestMessage.apply {
                             visibility = View.VISIBLE
                             text = "Anda sudah menyelesaikan semua quest hari ini"
@@ -177,6 +178,7 @@ class HomeFragment : Fragment() {
                                 }
                                 "quiz" -> {
                                     val intent = Intent(requireContext(), QuizActivity::class.java)
+                                    intent.putExtra(QuizActivity.QUEST_EXTRA, quest)
                                     startActivity(intent)
                                 }
                                 "reminder" -> {

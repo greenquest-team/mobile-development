@@ -168,7 +168,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:elevation="15dp"
-            android:text="0%"
+            android:text="@string/progress_home"
             android:textColor="#000"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="@+id/circularProgressBar"
@@ -183,7 +183,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/gabarito_bold"
-            android:text="lihat"
+            android:text="@string/btnMissionText"
             android:textAllCaps="false"
             android:textColor="@color/black"
             android:textSize="16sp"
@@ -210,13 +210,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:elevation="25dp"
             android:text="@string/quest_complete"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/rv_quest"
-            app:layout_constraintEnd_toEndOf="@+id/rv_quest"
-            app:layout_constraintStart_toStartOf="@+id/rv_quest"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/rv_quest"
             tools:visibility="visible" />
 
@@ -244,10 +245,10 @@
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/progress_bar"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
+            app:layout_constraintVertical_bias="0.0"
             tools:visibility="visible" />
 
         <ProgressBar

@@ -13,6 +13,7 @@ import com.dicoding.greenquest.ui.main.MainViewModel
 import com.dicoding.greenquest.ui.materi.MateriViewModel
 import com.dicoding.greenquest.ui.mission.MissionViewModel
 import com.dicoding.greenquest.ui.profile.ProfilesViewModel
+import com.dicoding.greenquest.ui.quiz.QuizViewModel
 import com.dicoding.greenquest.ui.register.SignupViewModel
 import com.dicoding.greenquest.ui.scan.ScanViewModel
 
@@ -50,6 +51,9 @@ class ViewModelFactory(private val repository: Repository) : ViewModelProvider.N
             }
             modelClass.isAssignableFrom(CustomizeProfileViewModel::class.java) -> {
                 CustomizeProfileViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(QuizViewModel::class.java) -> {
+                QuizViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

@@ -40,4 +40,9 @@
 
     <string name="image_classifier_failed">Image classifier failed to initialize. See error logs for details</string>
     <string name="text_objective">Objective: Scan</string>
+    <string name="done_quiz">Selesai</string>
+    <string name="point_leadderboard">100</string>
+    <string name="username_leaderboard">Username User</string>
+    <string name="progress_home">0%</string>
+    <string name="btnMissionText">lihat</string>
 </resources>

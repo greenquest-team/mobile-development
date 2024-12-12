@@ -4,6 +4,8 @@ import com.dicoding.greenquest.data.remote.response.LeaderboardResponse
 import com.dicoding.greenquest.data.remote.response.LoginResponse
 import com.dicoding.greenquest.data.remote.response.MaterialResponse
 import com.dicoding.greenquest.data.remote.response.QuestResponse
+import com.dicoding.greenquest.data.remote.response.QuizPostResponse
+import com.dicoding.greenquest.data.remote.response.QuizResponse
 import com.dicoding.greenquest.data.remote.response.RegisterResponse
 import com.dicoding.greenquest.data.remote.response.StoryResponse
 import com.dicoding.greenquest.data.remote.response.UserPayload
@@ -50,6 +52,19 @@ interface ApiService {
     suspend fun getMaterial(
         @Query("type_name") query: String
     ): MaterialResponse
+
+    @GET("quizzes")
+    suspend fun getQuiz(
+        @Query("type_name") query: String
+    ): QuizResponse
+
+    @FormUrlEncoded
+    @POST("quizzes/submit")
+    suspend fun postQuiz(
+        @Field("type_name") typeName: String,
+        @Field("answers[0]") firstAnswer: String,
+        @Field("answers[1]") secondAnswer: String
+    ): QuizPostResponse
 
     @POST("users/{id}")
     suspend fun updateUser(

@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.dicoding.greenquest.ViewModelFactory
 import com.dicoding.greenquest.databinding.FragmentLeaderboardBinding
 import com.dicoding.greenquest.data.Result
@@ -68,6 +69,20 @@ class LeaderboardFragment : Fragment() {
                     val adapter = LeaderboardAdapter()
                     adapter.submitList(data)
                     binding.rvLeaderboard.adapter = adapter
+
+                    val topThree = data.sortedByDescending { it.points?.toInt() }.take(3)
+
+                    if (topThree.isNotEmpty()) {
+                        topThree.getOrNull(0)?.avatar?.let { url ->
+                            Glide.with(requireContext()).load(url).into(binding.ivAvatarFirst)
+                        }
+                        topThree.getOrNull(1)?.avatar?.let { url ->
+                            Glide.with(requireContext()).load(url).into(binding.ivAvatarSecond)
+                        }
+                        topThree.getOrNull(2)?.avatar?.let { url ->
+                            Glide.with(requireContext()).load(url).into(binding.ivAvatarThird)
+                        }
+                    }
                 }
                 is Result.Error -> {
                     showLoading(false)

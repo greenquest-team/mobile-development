@@ -48,7 +48,7 @@ inline fun <reified T> mapQuestResponseToEntity(
                 questId = quest.id ?: 0,
                 userId = userId,
                 materialId = quest.wasteTypesId ?: 0,
-                typeName = quest.typeName ?: "material",
+                typeName = quest.typeName ?: "",
                 descriptionQuest = quest.descriptionQuest ?: "",
                 image = quest.image ?: "",
                 wasteTypesId = quest.wasteTypesId ?: 0,
@@ -63,7 +63,7 @@ inline fun <reified T> mapQuestResponseToEntity(
                 questId = quest.id ?: 0,
                 userId = userId,
                 materialId = 0, // Default untuk `QuestQuizItem`
-                typeName = "Quiz",
+                typeName = quest.typeName ?: "",
                 descriptionQuest = quest.descriptionQuest ?: "",
                 image = quest.image ?: "",
                 wasteTypesId = quest.wasteTypesId ?: 0,

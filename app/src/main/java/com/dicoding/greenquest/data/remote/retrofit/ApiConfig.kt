@@ -2,7 +2,6 @@ package com.dicoding.greenquest.data.remote.retrofit
 
 import android.util.Log
 import com.dicoding.greenquest.BuildConfig
-import com.dicoding.greenquest.data.remote.ApiType
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -17,11 +16,7 @@ class ApiConfig {
             token = newToken
         }
 
-        fun getApiService(apiType: ApiType): ApiService {
-            val baseUrl = when (apiType) {
-                ApiType.REAL -> BuildConfig.BASE_URL
-                ApiType.DUMMY -> BuildConfig.DUMMY_URL
-            }
+        fun getApiService(): ApiService {
             val loggingInterceptor = if(BuildConfig.DEBUG) { HttpLoggingInterceptor().setLevel(
                 HttpLoggingInterceptor.Level.BODY) } else { HttpLoggingInterceptor().setLevel(
                 HttpLoggingInterceptor.Level.NONE) }
@@ -38,7 +33,7 @@ class ApiConfig {
                 .addInterceptor(authInterceptor)
                 .build()
             val retrofit = Retrofit.Builder()
-                .baseUrl(baseUrl)
+                .baseUrl(BuildConfig.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()

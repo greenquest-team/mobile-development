@@ -40,6 +40,9 @@ data class QuestQuizItem(
 	@field:SerializedName("image")
 	val image: String? = null,
 
+	@field:SerializedName("type_name")
+	val typeName: String? = null,
+
 	@field:SerializedName("description_quest")
 	val descriptionQuest: String? = null,
 
