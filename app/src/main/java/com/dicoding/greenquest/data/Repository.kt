@@ -98,15 +98,18 @@ class Repository private constructor(
     fun getQuest(): LiveData<Result<List<QuestEntity>>> = liveData(Dispatchers.IO) {
         emit(Result.Loading)
 
+        val startOfDay = getStartOfLocalDay()
+        val endOfDay = getEndOfLocalDay()
+
+        val entity: List<QuestEntity>
+
         try {
             // Ambil userId dari DataStore
             val userId = userPreference.getSession().map { it.user_id }.first()
 
             // Periksa data lokal berdasarkan tanggal hari ini
-            val startOfDay = getStartOfLocalDay()
-            val endOfDay = getEndOfLocalDay()
-            val quests = questDao.getQuestByDateRange(startOfDay, endOfDay)
-
+            val quests =
+            questDao.getQuestByDateRange(startOfDay, endOfDay)
             if (quests.isNotEmpty()) {
                 // Jika data lokal untuk hari ini tersedia, kembalikan data tersebut
                 emit(Result.Success(quests))
@@ -130,7 +133,9 @@ class Repository private constructor(
 
                 questDao.insertAll(combinedEntities)
 
-                emit(Result.Success(combinedEntities))
+                entity = questDao.getQuestByDateRange(startOfDay, endOfDay)
+
+                emit(Result.Success(entity))
             }
         } catch (e: Exception) {
             Log.e("Repository", "getQuest: ${e.message}", e)
@@ -143,8 +148,14 @@ class Repository private constructor(
     }
 
     suspend fun updateQuest(quest: QuestEntity, completedState: Boolean) {
-        quest.isCompleted = completedState
-        questDao.updateQuest(quest)
+        val existingQuest = questDao.getQuestById(quest.id)
+        if (existingQuest != null) {
+            quest.isCompleted = completedState
+            questDao.updateQuest(quest)
+            Log.d("Repository", "Quest with ID ${quest.id} found in database.")
+        } else {
+            Log.e("Repository", "Quest with ID ${quest.id} not found in database.")
+        }
     }
 
     fun getLeaderboard(): LiveData<Result<List<LeaderboardEntity>>> = liveData(Dispatchers.IO) {

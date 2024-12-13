@@ -226,7 +226,6 @@ class HomeFragment : Fragment() {
                 // Tampilkan pesan keberhasilan
                 showToast("Yeah, kamu sudah berhasil menjadi pahlawan penjaga lingkungan!")
                 homeViewModel.updateQuest(quest)
-
                 updateUserPoints(userID, points, quest.pointsAwarded)
 
                 observeViewModel()

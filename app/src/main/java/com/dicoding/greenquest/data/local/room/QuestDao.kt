@@ -14,6 +14,9 @@ interface QuestDao {
     @Query("SELECT * FROM UserQuest WHERE createdAt BETWEEN :startOfDay AND :endOfDay")
     fun getQuestByDateRange(startOfDay: Long, endOfDay: Long): List<QuestEntity>
 
+    @Query("SELECT * FROM UserQuest WHERE id = :questId")
+    suspend fun getQuestById(questId: Int): QuestEntity?
+
     @Query("SELECT * FROM UserQuest WHERE isCompleted = 1")
     fun getQuestIsCompleted(): LiveData<List<QuestEntity>>
 
