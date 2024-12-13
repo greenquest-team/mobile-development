@@ -28,9 +28,7 @@ class MissionActivity : AppCompatActivity() {
         binding.rvMisi.layoutManager = layoutManagerBerlangsung
 
         missionViewModel.getQuestCompleted().observe(this) { questList ->
-            showLoading(true)
             if (questList != null && questList.isNotEmpty()) {
-                showLoading(false)
                 val adapter = RiwayatMissionAdapter()
                 adapter.submitList(questList)
                 binding.rvMisi.adapter = adapter
@@ -39,7 +37,7 @@ class MissionActivity : AppCompatActivity() {
                 binding.rvMisi.visibility = View.INVISIBLE
                 binding.tvNoQuestMessage.apply {
                     visibility = View.VISIBLE
-                    text = "Tidak ada quest yang kamu selesaikan sejauh ini"
+                    text = "Tidak ada misi yang kamu selesaikan sejauh ini"
                 }
             }
         }

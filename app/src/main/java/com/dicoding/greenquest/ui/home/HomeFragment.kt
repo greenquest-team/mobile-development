@@ -90,8 +90,8 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-        animatorSet?.cancel() // Batalkan animasi untuk mencegah error
-        animatorSet = null // Bersihkan referensi untuk menghindari memory leak
+        animatorSet?.cancel()
+        animatorSet = null
     }
 
     private fun observeViewModel() {
@@ -122,7 +122,7 @@ class HomeFragment : Fragment() {
                         binding.circularProgressBar.progress,
                         progressPercentage.toFloat()
                     ).apply {
-                        duration = 1000 // 1 second
+                        duration = 1000
                         interpolator = AccelerateDecelerateInterpolator() // Smooth easing
                     }
 
@@ -130,7 +130,7 @@ class HomeFragment : Fragment() {
                         binding.progressText.text.toString().removeSuffix("%").toInt(),
                         progressPercentage
                     ).apply {
-                        duration = 1000 // 1 second
+                        duration = 1000
                         addUpdateListener { animation ->
                             val progress = animation.animatedValue as Int
                             binding.progressText.text = "$progress%" // Update text dynamically
